@@ -1,6 +1,8 @@
 package org.lemon.compilers
 
+import java.io.File
 
-class Script {
+
+class Script(file:File) {
 
 }
