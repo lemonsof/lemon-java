@@ -2,7 +2,7 @@ package lemon.compilers
 
 import org.scalatest.FunSuite
 import java.io.File
-import lemon.compilers.backend.{JavaSerializableCodeGen, JavaBackendLogger, JavaCodeGen}
+import lemon.compilers.backend.{JavaRWCodeGen, JavaBackendLogger, JavaCodeGen}
 
 class CompileServiceTest extends FunSuite {
   test("test compile builtin types"){
@@ -11,7 +11,7 @@ class CompileServiceTest extends FunSuite {
 
     val codeGen =
       new JavaCodeGen(target,CompileService.builtinTypes.values)
-        with JavaSerializableCodeGen
+        with JavaRWCodeGen
         with JavaBackendLogger
 
     codeGen.gen()

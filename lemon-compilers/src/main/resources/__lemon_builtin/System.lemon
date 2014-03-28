@@ -10,6 +10,10 @@ message Manifest{
     string[10]          others
 }
 
+message ManifestV2 :Manifest{
+    map<string,string>  properties
+}
+
 service Lemon{
     Manifest manifest()
 }

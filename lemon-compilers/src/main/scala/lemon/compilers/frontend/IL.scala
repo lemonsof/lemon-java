@@ -33,7 +33,8 @@ case class FieldIL(
                      name:String,
                      fieldType : TypeIL,
                      required : Boolean,
-                     attributes : List[AttributeIL]) extends IL
+                     attributes : List[AttributeIL],
+                     id:Int = 0) extends IL
 
 case class MessageIL(
                        name:String,

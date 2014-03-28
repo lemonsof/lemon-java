@@ -42,8 +42,8 @@ class Script(file:File) extends RegexParsers with PackratParsers {
   })
 
   private lazy val field = attribute.* ~ opt("required") ~ any ~ id ^^ {
-    case a ~ Some(_) ~ t ~ n => FieldIL(n,t,required = true,a)
-    case a ~ None ~ t ~ n => FieldIL(n,t,required = false,a)
+    case a ~ Some(_) ~ t ~ n => FieldIL(n,t,true,a)
+    case a ~ None ~ t ~ n => FieldIL(n,t,false,a)
   }
 
   private lazy val enum = (attribute.* <~ "enum") ~ id ~ ("{" ~> enumFields <~ "}") ^^ {
