@@ -1,2 +1,15 @@
 namespace lemon
 
+enum ServiceType{ Local,Remote }
+
+message Manifest{
+    string              appName
+    string              version
+    string              description
+    list<string>        actors
+    string[10]          others
+}
+
+service Lemon{
+    Manifest manifest()
+}

@@ -1,9 +1,10 @@
 package lemon.compilers
 
 import java.io.File
+import lemon.compilers.frontend.{Script, Linker, IL}
 
 private object BuiltinCompiler {
-  def compile():Map[String,ILL] = {
+  def compile():Map[String,IL] = {
 
     val directory =  this.getClass.getClassLoader.getResource("__lemon_builtin")
 
@@ -23,7 +24,7 @@ object CompileService {
 
   lazy val builtinTypes = BuiltinCompiler.compile()
 
-  def compile(files :Array[File]) : Map[String,ILL] = {
+  def compile(files :Array[File]) : Map[String,IL] = {
     Linker.link(files.map { file=> new Script(file) }) ++ builtinTypes
   }
 }

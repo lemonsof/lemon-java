@@ -16,3 +16,5 @@
   libraryDependencies in Global += "junit" % "junit" % "4.10" % "test"
 
   libraryDependencies in Global += "cglib" % "cglib" % "3.1"
+
+  libraryDependencies in Global += "com.sun.codemodel" % "codemodel" % "2.6"
