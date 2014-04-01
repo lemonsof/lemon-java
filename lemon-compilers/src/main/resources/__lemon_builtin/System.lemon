@@ -8,10 +8,13 @@ message Manifest{
     string              description
     list<string>        actors
     string[10]          others
+    int32               hello
 }
 
 message ManifestV2 :Manifest{
-    map<string,string>  properties
+    required map<string,string>     properties
+    list<list<string>>              actors2
+    map<string,map<string,int32>>   properties2
 }
 
 service Lemon{

@@ -1,4 +1,4 @@
-package lemon.messages
+package lemon.messages.io
 
 import scala.xml.Elem
 import java.util
@@ -57,7 +57,7 @@ final class XmlWriter(var root:Elem) extends MessageWriter with CollectionWriter
                                  id: Int,
                                  length: Int,
                                  attributes: util.Map[String, Any]): CollectionWriter = {
-    new XmlWriter(<array id={name}></array>)
+    new XmlWriter(<array id={name} length={length.toString}></array>)
   }
 
   override def closeListWriter(writer: CollectionWriter): Unit = {
@@ -123,7 +123,7 @@ final class XmlWriter(var root:Elem) extends MessageWriter with CollectionWriter
   }
 
   override def writeVar(value: Long, length: Int, signed: Boolean): Unit = {
-    appendChild(<Var value={value.toString}/>)
+    appendChild(<var value={value.toString}/>)
   }
 
   override def createMessageWriter(): MessageWriter =  new XmlWriter(<message></message>)
@@ -135,6 +135,14 @@ final class XmlWriter(var root:Elem) extends MessageWriter with CollectionWriter
   override def beginWrite(typeName: String, attributes: util.Map[String, Any]): Unit = {
 
   }
+
+  override def createMapWriter(): CollectionWriter =  new XmlWriter(<map></map>)
+
+  override def createSetWriter(): CollectionWriter = new XmlWriter(<set></set>)
+
+  override def createArrayWriter(length: Int): CollectionWriter =  new XmlWriter(<array length={length.toString}></array>)
+
+  override def createListWriter(): CollectionWriter =  new XmlWriter(<list></list>)
 }
 
 

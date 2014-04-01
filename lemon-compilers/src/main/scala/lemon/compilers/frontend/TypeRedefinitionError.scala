@@ -1,5 +1,7 @@
 package lemon.compilers.frontend
 
-case class TypeRedefinitionError(lhs:IL,rhs:IL) extends Exception(s"redefinition error :${lhs.Name}"){
+import lemon.messages.reflect.IR
+
+case class TypeRedefinitionError(lhs:IR,rhs:IR) extends Exception(s"redefinition error :${lhs.Name}"){
 
 }

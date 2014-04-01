@@ -1,11 +1,9 @@
 package lemon.compilers.backend
 import java.io.File
-import lemon.compilers.frontend._
 import com.sun.codemodel._
-import lemon.compilers.frontend.MessageIL
-import java.util
+import lemon.messages.reflect._
 
-class JavaCodeGen(output:File,types:Iterable[IL]) extends JavaBackend{
+class JavaCodeGen(output:File,types:Iterable[IR]) extends JavaBackend{
 
   private val _codeModel = new JCodeModel
 
@@ -21,14 +19,14 @@ class JavaCodeGen(output:File,types:Iterable[IL]) extends JavaBackend{
     files
   }
 
-  private def gen(current : IL){
+  private def gen(current : IR){
     current match {
-      case message:MessageIL => omit(message)
+      case message:Message_ => omit(message)
       case _ =>
     }
   }
 
-  override protected def omit(message: MessageIL): JDefinedClass = {
+  override protected def omit(message: Message_): JDefinedClass = {
     val model = codeModel._class(message.Name)
 
     message.extend.foreach{
@@ -46,15 +44,15 @@ class JavaCodeGen(output:File,types:Iterable[IL]) extends JavaBackend{
   }
 
   override protected def omit(
-                               message: MessageIL,
-                               attribute: AttributeIL,
+                               message: Message_,
+                               attribute: Attribute_,
                                model :JDefinedClass): Option[JAnnotationUse] = None
 
-  override protected def omit(message: MessageIL, field: FieldIL, model: JDefinedClass): JFieldVar = {
+  override protected def omit(message: Message_, field: Field_, model: JDefinedClass): JFieldVar = {
     val jType = getJType(field.fieldType)
     val methodName = field.name.charAt(0).toUpper + field.name.substring(1)
     val filedModel = field.fieldType match {
-      case ArrayIL(valType,length) =>
+      case Array_(valType,length) =>
         val fieldModel = model.field(JMod.PRIVATE|JMod.FINAL,jType,field.name)
         fieldModel.init(JExpr.newArray(getJType(valType),length))
         val getMethod = model.method(JMod.PUBLIC,jType,"get" + methodName)
@@ -78,9 +76,9 @@ class JavaCodeGen(output:File,types:Iterable[IL]) extends JavaBackend{
   }
 
   override protected def omit(
-                               message: MessageIL,
-                               field: FieldIL,
-                               attribute: AttributeIL,
+                               message: Message_,
+                               field: Field_,
+                               attribute: Attribute_,
                                model: JDefinedClass,
                                fieldModel: JFieldVar): Option[JAnnotationUse] = None
 }

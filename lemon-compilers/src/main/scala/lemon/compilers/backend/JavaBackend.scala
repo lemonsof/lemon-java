@@ -1,59 +1,112 @@
 package lemon.compilers.backend
 
 import com.sun.codemodel._
-import lemon.compilers.frontend._
 import java.util
-import lemon.compilers.frontend.SetIL
-import lemon.compilers.frontend.MessageIL
-import lemon.compilers.frontend.MapIL
-import lemon.compilers.frontend.AttributeIL
-import lemon.compilers.frontend.FieldIL
-import lemon.compilers.frontend.ListIL
-import lemon.compilers.frontend.VarIL
-import lemon.compilers.frontend.FloatIL
-import lemon.compilers.frontend.ArrayIL
-import lemon.compilers.frontend.FixedIL
+import lemon.messages.reflect._
+import lemon.messages.reflect.Map_
+import lemon.messages.reflect.Array_
+import lemon.messages.reflect.Fixed_
+import lemon.messages.reflect.Var_
+import lemon.messages.reflect.Message_
+import lemon.messages.reflect.Set_
+import lemon.messages.reflect.Float_
+import lemon.messages.reflect.Attribute_
+import lemon.messages.reflect.Ref_
+import lemon.messages.reflect.List_
+import lemon.messages.reflect.Field_
 
 abstract class JavaBackend {
   protected def codeModel:JCodeModel
 
-  protected def omit(message:MessageIL):JDefinedClass
+  protected def omit(message:Message_):JDefinedClass
 
-  protected def omit(message:MessageIL,attribute:AttributeIL,model :JDefinedClass):Option[JAnnotationUse]
+  protected def omit(message:Message_,attribute:Attribute_,model :JDefinedClass):Option[JAnnotationUse]
 
-  protected def omit(message:MessageIL,field:FieldIL,model :JDefinedClass):JFieldVar
+  protected def omit(message:Message_,field:Field_,model :JDefinedClass):JFieldVar
 
-  protected def omit(message:MessageIL,field:FieldIL,attribute:AttributeIL,model :JDefinedClass,fieldModel:JFieldVar):Option[JAnnotationUse]
+  protected def omit(message:Message_,field:Field_,attribute:Attribute_,model :JDefinedClass,fieldModel:JFieldVar):Option[JAnnotationUse]
 
-  protected def getJType(current:IL):JType = {
+  protected def getJType(current:IR,boxedType:Boolean = false):JType = {
     current match {
-      case ArrayIL(valType,length) =>
-        getJType(valType).array()
-      case ListIL(valType) =>
-        codeModel.ref(classOf[util.List[_]]).narrow(getJType(valType))
-      case SetIL(valType) =>
-        codeModel.ref(classOf[util.Set[_]]).narrow(getJType(valType))
-      case MapIL(keyType,valType) =>
-        codeModel.ref(classOf[util.Map[_,_]]).narrow(getJType(keyType)).narrow(getJType(valType))
-      case _:StringIL =>
+      case Array_(valType,length) =>
+        getJType(valType,boxedType = true).array()
+      case List_(valType) =>
+        codeModel.ref(classOf[util.List[_]]).narrow(getJType(valType,boxedType = true))
+      case Set_(valType) =>
+        codeModel.ref(classOf[util.Set[_]]).narrow(getJType(valType,boxedType = true))
+      case Map_(keyType,valType) =>
+        codeModel.ref(classOf[util.Map[_,_]]).narrow(getJType(keyType,boxedType = true)).narrow(getJType(valType,boxedType = true))
+      case _:String_ =>
         codeModel.ref(classOf[String])
-      case VarIL(length,signed) => length match {
-        case 1 => codeModel.ref(classOf[Byte])
-        case 2 => codeModel.ref(classOf[Short])
-        case 4 => codeModel.ref(classOf[Int])
-        case 8 => codeModel.ref(classOf[Long])
+      case Var_(length,_) => length match {
+        case 1 =>
+          if(!boxedType){
+            codeModel._ref(classOf[Byte])
+          } else {
+            codeModel.ref(classOf[java.lang.Byte])
+          }
+        case 2 =>
+          if(!boxedType){
+            codeModel._ref(classOf[Short])
+          } else {
+            codeModel.ref(classOf[java.lang.Short])
+          }
+        case 4 =>
+          if(!boxedType){
+            codeModel._ref(classOf[Int])
+          } else {
+            codeModel.ref(classOf[java.lang.Integer])
+          }
+
+        case 8 =>
+          if(!boxedType){
+            codeModel._ref(classOf[Long])
+          } else {
+            codeModel.ref(classOf[java.lang.Long])
+          }
       }
-      case FixedIL(length,_) => length match {
-        case 1 => codeModel.ref(classOf[Byte])
-        case 2 => codeModel.ref(classOf[Short])
-        case 4 => codeModel.ref(classOf[Int])
-        case 8 => codeModel.ref(classOf[Long])
+      case Fixed_(length,_) => length match {
+        case 1 =>
+          if(!boxedType){
+            codeModel._ref(classOf[Byte])
+          } else {
+            codeModel.ref(classOf[java.lang.Byte])
+          }
+        case 2 =>
+          if(!boxedType){
+            codeModel._ref(classOf[Short])
+          } else {
+            codeModel.ref(classOf[java.lang.Short])
+          }
+        case 4 =>
+          if(!boxedType){
+            codeModel._ref(classOf[Int])
+          } else {
+            codeModel.ref(classOf[java.lang.Integer])
+          }
+
+        case 8 =>
+          if(!boxedType){
+            codeModel._ref(classOf[Long])
+          } else {
+            codeModel.ref(classOf[java.lang.Long])
+          }
       }
-      case FloatIL(length) => length match {
-        case 4 => codeModel.ref(classOf[Float])
-        case 8 => codeModel.ref(classOf[Double])
+      case Float_(length) => length match {
+        case 4 =>
+          if(!boxedType){
+            codeModel._ref(classOf[Float])
+          } else {
+            codeModel.ref(classOf[Float])
+          }
+        case 8 =>
+          if(!boxedType){
+            codeModel._ref(classOf[Double])
+          } else {
+            codeModel.ref(classOf[java.lang.Double])
+          }
       }
-      case ReferenceIL(name) => codeModel.ref(name)
+      case Ref_(name) => codeModel.ref(name)
     }
   }
 }

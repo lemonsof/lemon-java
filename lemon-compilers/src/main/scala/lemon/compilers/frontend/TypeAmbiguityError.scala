@@ -1,5 +1,7 @@
 package lemon.compilers.frontend
 
-case class TypeAmbiguityError(name:String,foundSymbols:List[IL]) extends Exception(s"Ambiguity type definition:$name"){
+import lemon.messages.reflect.IR
+
+case class TypeAmbiguityError(name:String,foundSymbols:List[IR]) extends Exception(s"Ambiguity type definition:$name"){
 
 }

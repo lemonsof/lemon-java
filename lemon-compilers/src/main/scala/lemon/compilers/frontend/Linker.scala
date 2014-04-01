@@ -1,18 +1,22 @@
 package lemon.compilers.frontend
 
-case class LinkContext(script:ScriptIL,symbols :Map[String,IL])
+import lemon.messages.reflect._
+import scala.Some
+import lemon.messages.reflect.Attribute_
+
+case class LinkContext(script:Script_,symbols :Map[String,IR])
 
 object Linker {
 
-  def link(scripts :Array[Script],symbols : Map[String,IL]) :Map[String,IL] ={
+  def link(scripts :Array[Script],symbols : Map[String,IR]) :Map[String,IR] ={
     val map = scripts.foldLeft(symbols){
-      (map:Map[String,IL],script:Script) => {
+      (map:Map[String,IR],script:Script) => {
         map ++ link0(script)
       }
     }
 
     map.map({
-      kv:(String,IL) => {
+      kv:(String,IR) => {
         implicit val context = LinkContext(kv._2.script.get,map)
         (kv._1,link(kv._2))
       }
@@ -20,51 +24,51 @@ object Linker {
   }
 
 
-  def link(scripts :Array[Script]) : Map[String,IL] = {
+  def link(scripts :Array[Script]) : Map[String,IR] = {
     link(scripts,Map())
   }
 
-  private def link(any:IL)(implicit context :LinkContext) : IL = {
+  private def link(any:IR)(implicit context :LinkContext) : IR = {
     any match {
-      case message : MessageIL => link(message)
-      case service : ServiceIL => link(service)
-      case enum : EnumIL => link(enum)
+      case message : Message_ => link(message)
+      case service : Service_ => link(service)
+      case enum : Enum_ => link(enum)
     }
 
   }
 
-  private def link(message:MessageIL)(implicit context :LinkContext):MessageIL = {
+  private def link(message:Message_)(implicit context :LinkContext):Message_ = {
     val name = message.script.get.namespace.fullName + "." + message.name
 
-    MessageIL(
+    Message_(
       name,
       message.fields.map(link),
       message.extend.map(link),
       message.attributes.map(link))
   }
 
-  private def link(field :FieldIL)(implicit context :LinkContext) : FieldIL = {
-    FieldIL(
+  private def link(field :Field_)(implicit context :LinkContext) : Field_ = {
+    Field_(
       field.name,
       link(field.fieldType),
       field.required,
       field.attributes.map(link))
   }
 
-  private def link(anyType : TypeIL)(implicit context :LinkContext) : TypeIL = {
+  private def link(anyType : Type_)(implicit context :LinkContext) : Type_ = {
     anyType match {
-      case message : MessageIL => link(message)
-      case enum : EnumIL => link(enum)
-      case ArrayIL(valType,length) => ArrayIL(link(valType),length)
-      case MapIL(key,value) => MapIL(link(key),link(value))
-      case SetIL(value) => SetIL(link(value))
-      case ListIL(value) => ListIL(link(value))
-      case ref:ReferenceIL => link(ref)
+      case message : Message_ => link(message)
+      case enum : Enum_ => link(enum)
+      case Array_(valType,length) => Array_(link(valType),length)
+      case Map_(key,value) => Map_(link(key),link(value))
+      case Set_(value) => Set_(link(value))
+      case List_(value) => List_(link(value))
+      case ref:Ref_ => link(ref)
       case _ => anyType
     }
   }
 
-  private def link(ref : ReferenceIL)(implicit context :LinkContext) : ReferenceIL = {
+  private def link(ref : Ref_)(implicit context :LinkContext) : Ref_ = {
     val symbols = context.symbols
     val script = context.script
     //first try to link symbol in same script
@@ -89,59 +93,59 @@ object Linker {
       foundSymbols(0)
     }
 
-    ReferenceIL(symbol.script.get.namespace.fullName + "." + ref.name)
+    Ref_(symbol.script.get.namespace.fullName + "." + ref.name)
   }
 
-  private def link(customerType : CustomerTypeIL)(implicit context :LinkContext) : CustomerTypeIL = {
+  private def link(customerType : CustomerType_)(implicit context :LinkContext) : CustomerType_ = {
     customerType match {
-      case message : MessageIL => link(message)
-      case enum : EnumIL => link(enum)
-      case ref:ReferenceIL => link(ref)
+      case message : Message_ => link(message)
+      case enum : Enum_ => link(enum)
+      case ref:Ref_ => link(ref)
     }
   }
 
-  private def link(attribute : AttributeIL)(implicit context :LinkContext) : AttributeIL = {
+  private def link(attribute : Attribute_)(implicit context :LinkContext) : Attribute_ = {
     attribute
   }
 
-  private def link(service:ServiceIL)(implicit context :LinkContext): ServiceIL = {
+  private def link(service:Service_)(implicit context :LinkContext): Service_ = {
     val name = service.script.get.namespace.fullName + "." + service.name
-    ServiceIL(
+    Service_(
       name,
       service.methods.map(link),
       service.extend.map(link),
       service.attributes.map(link))
   }
 
-  private def link(method:MethodIL)(implicit context :LinkContext): MethodIL = {
-    MethodIL(
+  private def link(method:Method_)(implicit context :LinkContext): Method_ = {
+    Method_(
       method.name,
       method.params.map(link),
       method.exceptions.map(link),
       method.attributes.map(link))
   }
 
-  private def link(param:ParamIL)(implicit context :LinkContext): ParamIL = {
-    ParamIL(
+  private def link(param:Param_)(implicit context :LinkContext): Param_ = {
+    Param_(
       param.name,
       link(param.vaType),
       param.required,
       param.attributes.map(link))
   }
 
-  private def link(enum:EnumIL)(implicit context :LinkContext) : EnumIL = {
+  private def link(enum:Enum_)(implicit context :LinkContext) : Enum_ = {
     val name = enum.script.get.namespace.fullName + "." + enum.name
 
-    EnumIL(
+    Enum_(
       name,
       enum.fields,
       enum.attributes.map(link))
   }
 
-  private def link0(script : Script) : Map[String,IL] = {
+  private def link0(script : Script) : Map[String,IR] = {
     val root = script.root
-    root.types.foldLeft(Map[String,IL]()){
-      (map:Map[String,IL],current) => {
+    root.types.foldLeft(Map[String,IR]()){
+      (map:Map[String,IR],current) => {
         val name = root.namespace.fullName + "." + current.Name
 
         if(map.contains(name)){

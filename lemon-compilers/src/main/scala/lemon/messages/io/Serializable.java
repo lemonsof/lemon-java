@@ -1,9 +1,6 @@
-package lemon.messages;
-
-import java.util.Map;
+package lemon.messages.io;
 
 public interface Serializable {
-    void read(Reader reader);
+    void read(MessageReader reader);
     void write(MessageWriter messageWriter);
-
 }

@@ -1,4 +1,5 @@
-package lemon.messages
+package lemon.messages.reflect
+
 import java.util
 
 trait MetadataResolver {

@@ -15,5 +15,9 @@ class CompileServiceTest extends FunSuite {
         with JavaBackendLogger
 
     codeGen.gen()
+
+    val xml = <root><message id="12"></message></root>
+
+    println((xml \ "message").filter(node => node.attribute("id").exists(title => title.text == "12")))
   }
 }

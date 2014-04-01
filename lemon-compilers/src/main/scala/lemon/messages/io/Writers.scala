@@ -1,4 +1,5 @@
-package lemon.messages
+package lemon.messages.io
+
 import java.util
 
 trait MessageWriter {
@@ -50,6 +51,18 @@ trait CollectionWriter {
   def writeFloat(value: Float)
   def writeDouble(value: Double)
   def writeString(value: String)
+
+  def createListWriter():CollectionWriter
+  def closeListWriter(writer:CollectionWriter)
+
+  def createArrayWriter(length:Int):CollectionWriter
+  def closeArrayWriter(writer:CollectionWriter)
+
+  def createSetWriter():CollectionWriter
+  def closeSetWriter(writer:CollectionWriter)
+
+  def createMapWriter():CollectionWriter
+  def closeMapWriter(writer:CollectionWriter)
 
   def writeNext()
 }
