@@ -4,6 +4,7 @@ import com.sun.codemodel._
 import lemon.messages.reflect._
 import lemon.messages.reflect.Field_
 import lemon.messages.reflect.Message_
+import lemon.messages.ConstraintException
 
 
 trait JavaWriterCodeGen extends JavaBackend{
@@ -21,6 +22,7 @@ trait JavaWriterCodeGen extends JavaBackend{
 
   private def writerMethod(model:JDefinedClass,message: Message_) {
     val writerMethod = model.method(JMod.PUBLIC,codeModel.VOID,"write")
+    writerMethod.annotate(classOf[Override])
     val writer = writerMethod.param(JMod.FINAL,codeModel.ref(classOf[lemon.messages.io.Writer]),"writer")
     val resolver = writerMethod.param(JMod.FINAL,codeModel.ref(classOf[lemon.messages.reflect.MetaDataResolver]),"resolver")
     val block = writerMethod.body()
@@ -35,8 +37,11 @@ trait JavaWriterCodeGen extends JavaBackend{
     message.fields.foreach{
       field =>
         val attributes = resolver.invoke("resolve").arg(JExpr.lit(s"${message.name}.${field.name}"))
+
         writeField(field,JExpr._this().ref(field.name),block,attributes,writer,resolver)
     }
+
+    block.invoke(writer,"end")
   }
 
 
@@ -45,12 +50,14 @@ trait JavaWriterCodeGen extends JavaBackend{
 
     field.fieldType match {
       case ref:Ref_ =>
-        block.add(source.invoke("write").arg(writer.invoke("writeMessage")
+        block._if(source.eq(JExpr._null()).not())._then()
+          .add(source.invoke("write").arg(writer.invoke("writeMessage")
           .arg(JExpr.lit(field.name))
           .arg(JExpr.lit(field.id))
           .arg(attributes)).arg(resolver))
       case string:String_ =>
-        block.add(writer.invoke("writeString")
+        block._if(source.eq(JExpr._null()).not())._then()
+          .add(writer.invoke("writeString")
           .arg(JExpr.lit(field.name))
           .arg(JExpr.lit(field.id))
           .arg(source)
@@ -80,7 +87,8 @@ trait JavaWriterCodeGen extends JavaBackend{
           .arg(attributes))
 
       case Array_(valType,length) =>
-        val seqWriter = block.decl(
+        val ifBlock = block._if(source.eq(JExpr._null()).not())._then()
+        val seqWriter = ifBlock.decl(
           codeModel.ref(classOf[lemon.messages.io.SeqWriter]),
           field.name + "Writer",
           writer.invoke("writeArray")
@@ -88,35 +96,38 @@ trait JavaWriterCodeGen extends JavaBackend{
             .arg(JExpr.lit(field.id))
             .arg(JExpr.lit(length)))
 
-        writeSeq(valType,seqWriter,source,block,resolver)
+        writeSeq(valType,seqWriter,source,ifBlock,resolver)
       case List_(valType) =>
-        val seqWriter = block.decl(
+        val ifBlock = block._if(source.eq(JExpr._null()).not())._then()
+        val seqWriter = ifBlock.decl(
           codeModel.ref(classOf[lemon.messages.io.SeqWriter]),
           field.name + "Writer",
           writer.invoke("writeList")
             .arg(JExpr.lit(field.name))
             .arg(JExpr.lit(field.id)))
 
-        writeSeq(valType,seqWriter,source,block,resolver)
+        writeSeq(valType,seqWriter,source,ifBlock,resolver)
       case Set_(valType) =>
-        val seqWriter = block.decl(
+        val ifBlock = block._if(source.eq(JExpr._null()).not())._then()
+        val seqWriter = ifBlock.decl(
           codeModel.ref(classOf[lemon.messages.io.SeqWriter]),
           field.name + "Writer",
           writer.invoke("writeSet")
             .arg(JExpr.lit(field.name))
             .arg(JExpr.lit(field.id)))
 
-        writeSeq(valType,seqWriter,source,block,resolver)
+        writeSeq(valType,seqWriter,source,ifBlock,resolver)
 
       case Map_(keyType,valType) =>
-        val seqWriter = block.decl(
+        val ifBlock = block._if(source.eq(JExpr._null()).not())._then()
+        val seqWriter = ifBlock.decl(
           codeModel.ref(classOf[lemon.messages.io.SeqWriter]),
           field.name + "Writer",
           writer.invoke("writeMap")
             .arg(JExpr.lit(field.name))
             .arg(JExpr.lit(field.id)))
 
-        writeMap(keyType,valType,seqWriter,source,block,resolver)
+        writeMap(keyType,valType,seqWriter,source,ifBlock,resolver)
       case _ =>
     }
 

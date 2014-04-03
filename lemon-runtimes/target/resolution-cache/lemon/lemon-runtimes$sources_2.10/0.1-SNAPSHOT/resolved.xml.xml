@@ -4,7 +4,7 @@
 		module="lemon-runtimes$sources_2.10"
 		revision="0.1-SNAPSHOT"
 		status="integration"
-		publication="20140401134810"
+		publication="20140403134638"
 	/>
 	<configurations>
 		<conf name="default" visibility="public" description=""/>

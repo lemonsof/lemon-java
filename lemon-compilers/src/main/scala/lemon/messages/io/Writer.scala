@@ -25,6 +25,8 @@ trait Writer {
   def writeSet(name:String,id:Int):SeqWriter
 
   def writeMap(name:String,id:Int):SeqWriter
+
+  def end()
 }
 
 trait SeqWriter{
