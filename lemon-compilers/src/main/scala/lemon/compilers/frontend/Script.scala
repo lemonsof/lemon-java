@@ -4,7 +4,6 @@ import java.io.File
 import scala.util.parsing.combinator.{PackratParsers, RegexParsers}
 import scala.io.{BufferedSource, Source}
 import org.slf4j.LoggerFactory
-import scala.Some
 import lemon.messages.reflect._
 import scala.Some
 
@@ -16,8 +15,8 @@ class Script(file:File) extends RegexParsers with PackratParsers {
   private def compile(source: BufferedSource) : Script_ = {
     parseAll(script, source.bufferedReader()) match {
       case Success(r, _) => r
-      case Failure(msg, input) => throw new Exception(msg + " (" + input.pos + ")")
-      case Error(msg, input) => throw new Exception(msg + " (" + input.pos + ")")
+      case Failure(msg, input) => throw new Exception(file+":"+ msg + " (" + input.pos + ")")
+      case Error(msg, input) => throw new Exception(file+":"+msg + " (" + input.pos + ")")
     }
   }
 
@@ -36,7 +35,9 @@ class Script(file:File) extends RegexParsers with PackratParsers {
 
   private lazy val namespace = positioned("namespace" ~> fullName ^^ { Namespace_ })
 
-  private lazy val attribute = ("[" ~> opt(id <~ ":")) ~ (messageLiteral <~ "]") ^^ {
+  private lazy val attributeTarget = "return" ||| "script"
+
+  private lazy val attribute = ("[" ~> opt(attributeTarget <~ ":")) ~ (messageLiteral <~ "]") ^^ {
     case t ~ m => Attribute_(m,t)
   }
 
@@ -44,7 +45,7 @@ class Script(file:File) extends RegexParsers with PackratParsers {
     case a ~ n ~ e ~ f => Message_(n,f,e,a)
   })
 
-  private lazy val field = attribute.* ~ opt("required") ~ any ~ id ^^ {
+  private lazy val field = attribute.* ~ opt("required") ~ any ~ id <~ ";" ^^ {
     case a ~ Some(_) ~ t ~ n => Field_(n,t,true,a)
     case a ~ None ~ t ~ n => Field_(n,t,false,a)
   }
@@ -94,10 +95,10 @@ class Script(file:File) extends RegexParsers with PackratParsers {
   }
 
   private lazy val method = attribute.* ~ any ~ id ~ ("(" ~> opt(params) <~ ")") ~ opt("throws" ~ "(" ~> exceptions <~")") ^^ {
-    case a ~ r ~ n ~ Some(p) ~ Some(e) => Method_(n,List(Param_("return",r,required = false,List())):::p,e,a)
-    case a ~ r ~ n ~ Some(p) ~ None => Method_(n,List(Param_("return",r,required = false,List())):::p,List(),a)
-    case a ~ r ~ n ~ None ~ Some(e) => Method_(n,List(Param_("return",r,required = false,List())),e,a)
-    case a ~ r ~ n ~ None ~ None => Method_(n,List(Param_("return",r,required = false,List())),List(),a)
+    case a ~ r ~ n ~ Some(p) ~ Some(e) => Method_(n,Param_("return",r,required = false,List()),p,e,a)
+    case a ~ r ~ n ~ Some(p) ~ None => Method_(n,Param_("return",r,required = false,List()),p,List(),a)
+    case a ~ r ~ n ~ None ~ Some(e) => Method_(n,Param_("return",r,required = false,List()),List(),e,a)
+    case a ~ r ~ n ~ None ~ None => Method_(n,Param_("return",r,required = false,List()),List(),List(),a)
   }
 
   private lazy val exceptions = id ~ ("," ~> id).* ^^ {

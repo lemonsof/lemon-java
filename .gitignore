@@ -19,7 +19,7 @@ syntax: glob
 *.iml
 
 # building
-target
+targetType
 build
 null
 tmp*
@@ -37,7 +37,7 @@ build.log
 #  syntax: regexp
 #  ^\.pc/
 
-#SHITTY output not in target directory
+#SHITTY output not in targetType directory
 build.log
 
 gen

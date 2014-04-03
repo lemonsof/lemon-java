@@ -29,7 +29,7 @@ abstract class JavaBackend {
   protected def getJType(current:IR,boxedType:Boolean = false):JType = {
     current match {
       case Array_(valType,length) =>
-        getJType(valType,boxedType = true).array()
+        getJType(valType).array()
       case List_(valType) =>
         codeModel.ref(classOf[util.List[_]]).narrow(getJType(valType,boxedType = true))
       case Set_(valType) =>
@@ -107,6 +107,7 @@ abstract class JavaBackend {
           }
       }
       case Ref_(name) => codeModel.ref(name)
+      case _:Boolean_ => codeModel.BOOLEAN
     }
   }
 }

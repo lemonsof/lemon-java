@@ -97,6 +97,7 @@ case class Param_(
 
 case class Method_(
                       name:String,
+                      returnParam:Param_,
                       params : List[Param_],
                       exceptions:List[CustomerType_],
                       attributes : List[Attribute_]) extends IR

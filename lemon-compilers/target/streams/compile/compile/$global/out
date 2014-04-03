@@ -1,0 +1,165 @@
+[0m[[0mdebug[0m] [0m[0m
+[0m[[0mdebug[0m] [0mInitial source changes: [0m
+[0m[[0mdebug[0m] [0m	removed:Set()[0m
+[0m[[0mdebug[0m] [0m	added: Set(E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\frontend\IL.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\backend\JavaBackendLogger.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\messages\XmlWriter.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\Compiler.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\frontend\Script.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\frontend\TypeUnsatisfiedLinkError.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\java\lemon\messages\Type.java, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\frontend\TypeAmbiguityError.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\messages\MetadataResolver.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\backend\JavaBackend.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\java\lemon\messages\Serializable.java, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\backend\JavaRWCodeGen.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\frontend\TypeRedefinitionError.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\frontend\Linker.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\backend\JavaCodeGen.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\messages\Writers.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\java\lemon\messages\SchemaBuilder.java, E:\Workspace\lemon-java\lemon-compilers\src\main\java\lemon\messages\Reader.java)[0m
+[0m[[0mdebug[0m] [0m	modified: Set()[0m
+[0m[[0mdebug[0m] [0mRemoved products: Set()[0m
+[0m[[0mdebug[0m] [0mModified external sources: Set()[0m
+[0m[[0mdebug[0m] [0mModified binary dependencies: Set()[0m
+[0m[[0mdebug[0m] [0mInitial directly invalidated sources: Set(E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\frontend\IL.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\backend\JavaBackendLogger.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\messages\XmlWriter.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\Compiler.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\frontend\Script.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\frontend\TypeUnsatisfiedLinkError.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\java\lemon\messages\Type.java, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\frontend\TypeAmbiguityError.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\messages\MetadataResolver.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\backend\JavaBackend.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\java\lemon\messages\Serializable.java, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\backend\JavaRWCodeGen.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\frontend\TypeRedefinitionError.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\frontend\Linker.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\backend\JavaCodeGen.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\messages\Writers.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\java\lemon\messages\SchemaBuilder.java, E:\Workspace\lemon-java\lemon-compilers\src\main\java\lemon\messages\Reader.java)[0m
+[0m[[0mdebug[0m] [0m[0m
+[0m[[0mdebug[0m] [0mSources indirectly invalidated by:[0m
+[0m[[0mdebug[0m] [0m	product: Set()[0m
+[0m[[0mdebug[0m] [0m	binary dep: Set()[0m
+[0m[[0mdebug[0m] [0m	external source: Set()[0m
+[0m[[0mdebug[0m] [0mAll initially invalidated sources: Set(E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\frontend\IL.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\backend\JavaBackendLogger.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\messages\XmlWriter.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\Compiler.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\frontend\Script.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\frontend\TypeUnsatisfiedLinkError.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\java\lemon\messages\Type.java, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\frontend\TypeAmbiguityError.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\messages\MetadataResolver.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\backend\JavaBackend.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\java\lemon\messages\Serializable.java, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\backend\JavaRWCodeGen.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\frontend\TypeRedefinitionError.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\frontend\Linker.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\compilers\backend\JavaCodeGen.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\scala\lemon\messages\Writers.scala, E:\Workspace\lemon-java\lemon-compilers\src\main\java\lemon\messages\SchemaBuilder.java, E:\Workspace\lemon-java\lemon-compilers\src\main\java\lemon\messages\Reader.java)[0m
+[0m[[0mdebug[0m] [0mRecompiling all 18 sources: invalidated sources (18) exceeded 50.0% of all sources[0m
+[0m[[0minfo[0m] [0mCompiling 14 Scala sources and 4 Java sources to E:\Workspace\lemon-java\lemon-compilers\target\scala-2.10\classes...[0m
+[0m[[0mdebug[0m] [0mGetting compiler-interface from component compiler for Scala 2.10.3[0m
+[0m[[0mdebug[0m] [0mGetting compiler-interface from component compiler for Scala 2.10.3[0m
+[0m[[0mdebug[0m] [0mRunning cached compiler 64eebe73, interfacing (CompilerInterface) with Scala compiler version 2.10.3[0m
+[0m[[0mdebug[0m] [0mCalling Scala compiler with arguments  (CompilerInterface):[0m
+[0m[[0mdebug[0m] [0m	-bootclasspath[0m
+[0m[[0mdebug[0m] [0m	C:\Program Files\Java\jre8\lib\resources.jar;C:\Program Files\Java\jre8\lib\rt.jar;C:\Program Files\Java\jre8\lib\sunrsasign.jar;C:\Program Files\Java\jre8\lib\jsse.jar;C:\Program Files\Java\jre8\lib\jce.jar;C:\Program Files\Java\jre8\lib\charsets.jar;C:\Program Files\Java\jre8\lib\jfr.jar;C:\Program Files\Java\jre8\classes;C:\Users\yayan\.sbt\boot\scala-2.10.3\lib\scala-library.jar[0m
+[0m[[0mdebug[0m] [0m	-classpath[0m
+[0m[[0mdebug[0m] [0m	E:\Workspace\lemon-java\lemon-compilers\target\scala-2.10\classes;C:\Users\yayan\.ivy2\cache\org.slf4j\slf4j-api\jars\slf4j-api-1.7.5.jar;C:\Users\yayan\.ivy2\cache\ch.qos.logback\logback-core\jars\logback-core-1.0.13.jar;C:\Users\yayan\.ivy2\cache\ch.qos.logback\logback-classic\jars\logback-classic-1.0.13.jar;C:\Users\yayan\.ivy2\cache\cglib\cglib\jars\cglib-3.1.jar;C:\Users\yayan\.ivy2\cache\org.ow2.asm\asm\jars\asm-4.2.jar;C:\Users\yayan\.ivy2\cache\com.sun.codemodel\codemodel\jars\codemodel-2.6.jar[0m
+[0m[[0mdebug[0m] [0mScala compilation took 7.106783087 s[0m
+[0m[[0mdebug[0m] [0mAttempting to call javac directly...[0m
+[0m[[0mdebug[0m] [0mcom.sun.tools.javac.Main not found with appropriate method signature; forking javac instead[0m
+[0m[[0mdebug[0m] [0mForking javac: javac @C:/Users/yayan/AppData/Local/Temp/sbt_3e38373f/argfile[0m
+java.io.IOException: Cannot run program "javac": CreateProcess error=2, 系统找不到指定的文件。
+	at java.lang.ProcessBuilder.start(Unknown Source)
+	at sbt.SimpleProcessBuilder.run(ProcessImpl.scala:388)
+	at sbt.AbstractProcessBuilder.run(ProcessImpl.scala:140)
+	at sbt.AbstractProcessBuilder$$anonfun$runBuffered$1.apply(ProcessImpl.scala:171)
+	at sbt.AbstractProcessBuilder$$anonfun$runBuffered$1.apply(ProcessImpl.scala:171)
+	at sbt.compiler.JavacLogger.buffer(AggressiveCompile.scala:235)
+	at sbt.AbstractProcessBuilder.runBuffered(ProcessImpl.scala:171)
+	at sbt.AbstractProcessBuilder.$bang(ProcessImpl.scala:168)
+	at sbt.compiler.AggressiveCompile$$anonfun$forkJavac$1.apply(AggressiveCompile.scala:214)
+	at sbt.compiler.AggressiveCompile$$anonfun$forkJavac$1.apply(AggressiveCompile.scala:209)
+	at sbt.compiler.JavaCompiler$$anonfun$forkJavac$1.sbt$compiler$JavaCompiler$$anonfun$$externalJavac$1(JavaCompiler.scala:100)
+	at sbt.compiler.JavaCompiler$$anonfun$forkJavac$1$$anonfun$apply$2.apply(JavaCompiler.scala:101)
+	at sbt.compiler.JavaCompiler$$anonfun$forkJavac$1$$anonfun$apply$2.apply(JavaCompiler.scala:101)
+	at sbt.compiler.JavaCompiler$$anonfun$withArgumentFile$1.apply(JavaCompiler.scala:121)
+	at sbt.compiler.JavaCompiler$$anonfun$withArgumentFile$1.apply(JavaCompiler.scala:118)
+	at sbt.IO$.withTemporaryDirectory(IO.scala:285)
+	at sbt.compiler.JavaCompiler$.withArgumentFile(JavaCompiler.scala:118)
+	at sbt.compiler.JavaCompiler$$anonfun$forkJavac$1.apply(JavaCompiler.scala:101)
+	at sbt.compiler.JavaCompiler$$anonfun$forkJavac$1.apply(JavaCompiler.scala:97)
+	at sbt.compiler.JavaCompiler$$anonfun$directOrForkJavac$1.apply(JavaCompiler.scala:93)
+	at sbt.compiler.JavaCompiler$$anonfun$directOrForkJavac$1.apply(JavaCompiler.scala:89)
+	at sbt.compiler.JavaCompiler$JavaTool0.compile(JavaCompiler.scala:75)
+	at sbt.compiler.JavaTool$class.apply(JavaCompiler.scala:35)
+	at sbt.compiler.JavaCompiler$JavaTool0.apply(JavaCompiler.scala:63)
+	at sbt.compiler.JavaCompiler$class.compile(JavaCompiler.scala:21)
+	at sbt.compiler.JavaCompiler$JavaTool0.compile(JavaCompiler.scala:63)
+	at sbt.compiler.AggressiveCompile$$anonfun$3$$anonfun$compileJava$1$1.apply$mcV$sp(AggressiveCompile.scala:126)
+	at sbt.compiler.AggressiveCompile$$anonfun$3$$anonfun$compileJava$1$1.apply(AggressiveCompile.scala:126)
+	at sbt.compiler.AggressiveCompile$$anonfun$3$$anonfun$compileJava$1$1.apply(AggressiveCompile.scala:126)
+	at sbt.compiler.AggressiveCompile.sbt$compiler$AggressiveCompile$$timed(AggressiveCompile.scala:159)
+	at sbt.compiler.AggressiveCompile$$anonfun$3.compileJava$1(AggressiveCompile.scala:125)
+	at sbt.compiler.AggressiveCompile$$anonfun$3.apply(AggressiveCompile.scala:142)
+	at sbt.compiler.AggressiveCompile$$anonfun$3.apply(AggressiveCompile.scala:86)
+	at sbt.inc.IncrementalCompile$$anonfun$doCompile$1.apply(Compile.scala:38)
+	at sbt.inc.IncrementalCompile$$anonfun$doCompile$1.apply(Compile.scala:36)
+	at sbt.inc.Incremental$.cycle(Incremental.scala:73)
+	at sbt.inc.Incremental$$anonfun$1.apply(Incremental.scala:33)
+	at sbt.inc.Incremental$$anonfun$1.apply(Incremental.scala:32)
+	at sbt.inc.Incremental$.manageClassfiles(Incremental.scala:41)
+	at sbt.inc.Incremental$.compile(Incremental.scala:32)
+	at sbt.inc.IncrementalCompile$.apply(Compile.scala:26)
+	at sbt.compiler.AggressiveCompile.compile2(AggressiveCompile.scala:150)
+	at sbt.compiler.AggressiveCompile.compile1(AggressiveCompile.scala:70)
+	at sbt.compiler.AggressiveCompile.apply(AggressiveCompile.scala:45)
+	at sbt.Compiler$.apply(Compiler.scala:70)
+	at sbt.Defaults$.sbt$Defaults$$compileTaskImpl(Defaults.scala:736)
+	at sbt.Defaults$$anonfun$compileTask$1.apply(Defaults.scala:730)
+	at sbt.Defaults$$anonfun$compileTask$1.apply(Defaults.scala:730)
+	at scala.Function1$$anonfun$compose$1.apply(Function1.scala:47)
+	at sbt.$tilde$greater$$anonfun$$u2219$1.apply(TypeFunctions.scala:42)
+	at sbt.std.Transform$$anon$4.work(System.scala:64)
+	at sbt.Execute$$anonfun$submit$1$$anonfun$apply$1.apply(Execute.scala:237)
+	at sbt.Execute$$anonfun$submit$1$$anonfun$apply$1.apply(Execute.scala:237)
+	at sbt.ErrorHandling$.wideConvert(ErrorHandling.scala:18)
+	at sbt.Execute.work(Execute.scala:244)
+	at sbt.Execute$$anonfun$submit$1.apply(Execute.scala:237)
+	at sbt.Execute$$anonfun$submit$1.apply(Execute.scala:237)
+	at sbt.ConcurrentRestrictions$$anon$4$$anonfun$1.apply(ConcurrentRestrictions.scala:160)
+	at sbt.CompletionService$$anon$2.call(CompletionService.scala:30)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.io.IOException: CreateProcess error=2, 系统找不到指定的文件。
+	at java.lang.ProcessImpl.create(Native Method)
+	at java.lang.ProcessImpl.<init>(Unknown Source)
+	at java.lang.ProcessImpl.start(Unknown Source)
+	at java.lang.ProcessBuilder.start(Unknown Source)
+	at sbt.SimpleProcessBuilder.run(ProcessImpl.scala:388)
+	at sbt.AbstractProcessBuilder.run(ProcessImpl.scala:140)
+	at sbt.AbstractProcessBuilder$$anonfun$runBuffered$1.apply(ProcessImpl.scala:171)
+	at sbt.AbstractProcessBuilder$$anonfun$runBuffered$1.apply(ProcessImpl.scala:171)
+	at sbt.compiler.JavacLogger.buffer(AggressiveCompile.scala:235)
+	at sbt.AbstractProcessBuilder.runBuffered(ProcessImpl.scala:171)
+	at sbt.AbstractProcessBuilder.$bang(ProcessImpl.scala:168)
+	at sbt.compiler.AggressiveCompile$$anonfun$forkJavac$1.apply(AggressiveCompile.scala:214)
+	at sbt.compiler.AggressiveCompile$$anonfun$forkJavac$1.apply(AggressiveCompile.scala:209)
+	at sbt.compiler.JavaCompiler$$anonfun$forkJavac$1.sbt$compiler$JavaCompiler$$anonfun$$externalJavac$1(JavaCompiler.scala:100)
+	at sbt.compiler.JavaCompiler$$anonfun$forkJavac$1$$anonfun$apply$2.apply(JavaCompiler.scala:101)
+	at sbt.compiler.JavaCompiler$$anonfun$forkJavac$1$$anonfun$apply$2.apply(JavaCompiler.scala:101)
+	at sbt.compiler.JavaCompiler$$anonfun$withArgumentFile$1.apply(JavaCompiler.scala:121)
+	at sbt.compiler.JavaCompiler$$anonfun$withArgumentFile$1.apply(JavaCompiler.scala:118)
+	at sbt.IO$.withTemporaryDirectory(IO.scala:285)
+	at sbt.compiler.JavaCompiler$.withArgumentFile(JavaCompiler.scala:118)
+	at sbt.compiler.JavaCompiler$$anonfun$forkJavac$1.apply(JavaCompiler.scala:101)
+	at sbt.compiler.JavaCompiler$$anonfun$forkJavac$1.apply(JavaCompiler.scala:97)
+	at sbt.compiler.JavaCompiler$$anonfun$directOrForkJavac$1.apply(JavaCompiler.scala:93)
+	at sbt.compiler.JavaCompiler$$anonfun$directOrForkJavac$1.apply(JavaCompiler.scala:89)
+	at sbt.compiler.JavaCompiler$JavaTool0.compile(JavaCompiler.scala:75)
+	at sbt.compiler.JavaTool$class.apply(JavaCompiler.scala:35)
+	at sbt.compiler.JavaCompiler$JavaTool0.apply(JavaCompiler.scala:63)
+	at sbt.compiler.JavaCompiler$class.compile(JavaCompiler.scala:21)
+	at sbt.compiler.JavaCompiler$JavaTool0.compile(JavaCompiler.scala:63)
+	at sbt.compiler.AggressiveCompile$$anonfun$3$$anonfun$compileJava$1$1.apply$mcV$sp(AggressiveCompile.scala:126)
+	at sbt.compiler.AggressiveCompile$$anonfun$3$$anonfun$compileJava$1$1.apply(AggressiveCompile.scala:126)
+	at sbt.compiler.AggressiveCompile$$anonfun$3$$anonfun$compileJava$1$1.apply(AggressiveCompile.scala:126)
+	at sbt.compiler.AggressiveCompile.sbt$compiler$AggressiveCompile$$timed(AggressiveCompile.scala:159)
+	at sbt.compiler.AggressiveCompile$$anonfun$3.compileJava$1(AggressiveCompile.scala:125)
+	at sbt.compiler.AggressiveCompile$$anonfun$3.apply(AggressiveCompile.scala:142)
+	at sbt.compiler.AggressiveCompile$$anonfun$3.apply(AggressiveCompile.scala:86)
+	at sbt.inc.IncrementalCompile$$anonfun$doCompile$1.apply(Compile.scala:38)
+	at sbt.inc.IncrementalCompile$$anonfun$doCompile$1.apply(Compile.scala:36)
+	at sbt.inc.Incremental$.cycle(Incremental.scala:73)
+	at sbt.inc.Incremental$$anonfun$1.apply(Incremental.scala:33)
+	at sbt.inc.Incremental$$anonfun$1.apply(Incremental.scala:32)
+	at sbt.inc.Incremental$.manageClassfiles(Incremental.scala:41)
+	at sbt.inc.Incremental$.compile(Incremental.scala:32)
+	at sbt.inc.IncrementalCompile$.apply(Compile.scala:26)
+	at sbt.compiler.AggressiveCompile.compile2(AggressiveCompile.scala:150)
+	at sbt.compiler.AggressiveCompile.compile1(AggressiveCompile.scala:70)
+	at sbt.compiler.AggressiveCompile.apply(AggressiveCompile.scala:45)
+	at sbt.Compiler$.apply(Compiler.scala:70)
+	at sbt.Defaults$.sbt$Defaults$$compileTaskImpl(Defaults.scala:736)
+	at sbt.Defaults$$anonfun$compileTask$1.apply(Defaults.scala:730)
+	at sbt.Defaults$$anonfun$compileTask$1.apply(Defaults.scala:730)
+	at scala.Function1$$anonfun$compose$1.apply(Function1.scala:47)
+	at sbt.$tilde$greater$$anonfun$$u2219$1.apply(TypeFunctions.scala:42)
+	at sbt.std.Transform$$anon$4.work(System.scala:64)
+	at sbt.Execute$$anonfun$submit$1$$anonfun$apply$1.apply(Execute.scala:237)
+	at sbt.Execute$$anonfun$submit$1$$anonfun$apply$1.apply(Execute.scala:237)
+	at sbt.ErrorHandling$.wideConvert(ErrorHandling.scala:18)
+	at sbt.Execute.work(Execute.scala:244)
+	at sbt.Execute$$anonfun$submit$1.apply(Execute.scala:237)
+	at sbt.Execute$$anonfun$submit$1.apply(Execute.scala:237)
+	at sbt.ConcurrentRestrictions$$anon$4$$anonfun$1.apply(ConcurrentRestrictions.scala:160)
+	at sbt.CompletionService$$anon$2.call(CompletionService.scala:30)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+[0m[[31merror[0m] [0m(lemon-compilers/compile:[31mcompile[0m) java.io.IOException: Cannot run program "javac": CreateProcess error=2, 系统找不到指定的文件。[0m

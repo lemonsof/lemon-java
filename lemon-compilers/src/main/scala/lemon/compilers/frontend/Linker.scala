@@ -86,8 +86,8 @@ object Linker {
         symbols(importName + nodes.tail.mkString("."))
       }
 
-      if(foundSymbols.length > 1){
-        throw new TypeAmbiguityError(ref.Name,foundSymbols)
+      if(foundSymbols.length != 1){
+        throw new TypeAmbiguityError(ref,foundSymbols)
       }
 
       foundSymbols(0)
@@ -105,7 +105,37 @@ object Linker {
   }
 
   private def link(attribute : Attribute_)(implicit context :LinkContext) : Attribute_ = {
-    attribute
+    val symbols = context.symbols
+    val script = context.script
+    //first try to link symbol in same script
+    val symbol = script.types.find {
+      _.Name == attribute.valType.name
+    } getOrElse {
+
+      val nodes = attribute.valType.name.split('.')
+      //check using instruction
+      val importNames = script.imports.filter { importName =>
+        importName.fullName.endsWith(nodes(0)) && symbols.contains(importName + nodes.tail.mkString("."))
+      }
+
+      val foundSymbols = importNames.map{ importName =>
+        symbols(importName + nodes.tail.mkString("."))
+      }
+
+      if(foundSymbols.length > 1){
+        throw new TypeAmbiguityError(attribute.valType,foundSymbols)
+      }
+
+      foundSymbols(0)
+    }
+
+    Attribute_(
+    MessageLiteral_(
+      symbol.script.get.namespace.fullName + "." + attribute.valType.name,
+      attribute.valType.values,
+      attribute.valType.namedValues),
+    attribute.target
+    )
   }
 
   private def link(service:Service_)(implicit context :LinkContext): Service_ = {
@@ -118,11 +148,24 @@ object Linker {
   }
 
   private def link(method:Method_)(implicit context :LinkContext): Method_ = {
+
+    val returnAttributes = method.attributes.filter(_.target.exists(_ == "return"))
+
+    val methodAttributes = method.attributes.filter(!_.target.exists(_ == "return"))
+
+    val returnParam = Param_(
+      method.returnParam.name,
+      method.returnParam.vaType,
+      method.returnParam.required,
+      returnAttributes ++ method.returnParam.attributes
+    )
+
     Method_(
       method.name,
+      link(returnParam),
       method.params.map(link),
       method.exceptions.map(link),
-      method.attributes.map(link))
+      methodAttributes.map(link))
   }
 
   private def link(param:Param_)(implicit context :LinkContext): Param_ = {

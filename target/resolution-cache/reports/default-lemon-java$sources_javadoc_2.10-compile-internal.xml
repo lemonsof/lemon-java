@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="ivy-report.xsl"?>
+<ivy-report version="1.0">
+	<info
+		organisation="default"
+		module="lemon-java$sources_javadoc_2.10"
+		revision="0.1-SNAPSHOT"
+		conf="compile-internal"
+		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool"
+		date="20140401134810"/>
+	<dependencies>
+		<module organisation="com.sun.codemodel" name="codemodel">
+			<revision name="2.6" status="release" pubdate="20111202220857" resolver="sbt-chain" artresolver="sbt-chain" homepage="" downloaded="false" searched="false" default="false" conf="default(compile), default, compile, runtime, master" position="6">
+				<metadata-artifact status="no" details="" size="3148" time="0" location="C:\Users\yayan\.ivy2\cache\com.sun.codemodel\codemodel\ivy-2.6.xml" searched="false" origin-is-local="false" origin-location="http://repo1.maven.org/maven2/com/sun/codemodel/codemodel/2.6/codemodel-2.6.pom"/>
+				<caller organisation="default" name="lemon-java$sources_javadoc_2.10" conf="optional, compile, provided, compile-internal" rev="2.6" rev-constraint-default="2.6" rev-constraint-dynamic="2.6" callerrev="0.1-SNAPSHOT"/>
+				<artifacts>
+					<artifact name="codemodel" type="src" ext="jar" extra-classifier="sources" status="no" details="" size="178745" time="0" location="C:\Users\yayan\.ivy2\cache\com.sun.codemodel\codemodel\srcs\codemodel-2.6-sources.jar">
+						<origin-location is-local="false" location="http://repo1.maven.org/maven2/com/sun/codemodel/codemodel/2.6/codemodel-2.6-sources.jar"/>
+					</artifact>
+					<artifact name="codemodel" type="jar" ext="jar" status="no" details="" size="152436" time="0" location="C:\Users\yayan\.ivy2\cache\com.sun.codemodel\codemodel\jars\codemodel-2.6.jar">
+						<origin-location is-local="false" location="http://repo1.maven.org/maven2/com/sun/codemodel/codemodel/2.6/codemodel-2.6.jar"/>
+					</artifact>
+					<artifact name="codemodel" type="doc" ext="jar" extra-classifier="javadoc" status="no" details="" size="469687" time="0" location="C:\Users\yayan\.ivy2\cache\com.sun.codemodel\codemodel\docs\codemodel-2.6-javadoc.jar">
+						<origin-location is-local="false" location="http://repo1.maven.org/maven2/com/sun/codemodel/codemodel/2.6/codemodel-2.6-javadoc.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="cglib" name="cglib">
+			<revision name="3.1" status="release" pubdate="20131209210030" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://cglib.sourceforge.net/" downloaded="false" searched="false" default="false" conf="default(compile), default, compile, runtime, master" position="4">
+				<license name="ASF 2.0" url="http://www.apache.org/licenses/LICENSE-2.0.txt"/>
+				<metadata-artifact status="no" details="" size="2729" time="0" location="C:\Users\yayan\.ivy2\cache\cglib\cglib\ivy-3.1.xml" searched="false" origin-is-local="false" origin-location="http://repo1.maven.org/maven2/cglib/cglib/3.1/cglib-3.1.pom"/>
+				<caller organisation="default" name="lemon-java$sources_javadoc_2.10" conf="optional, compile, provided, compile-internal" rev="3.1" rev-constraint-default="3.1" rev-constraint-dynamic="3.1" callerrev="0.1-SNAPSHOT"/>
+				<artifacts>
+					<artifact name="cglib" type="src" ext="jar" extra-classifier="sources" status="no" details="" size="1541525" time="0" location="C:\Users\yayan\.ivy2\cache\cglib\cglib\srcs\cglib-3.1-sources.jar">
+						<origin-location is-local="false" location="http://repo1.maven.org/maven2/cglib/cglib/3.1/cglib-3.1-sources.jar"/>
+					</artifact>
+					<artifact name="cglib" type="jar" ext="jar" status="no" details="" size="283080" time="0" location="C:\Users\yayan\.ivy2\cache\cglib\cglib\jars\cglib-3.1.jar">
+						<origin-location is-local="false" location="http://repo1.maven.org/maven2/cglib/cglib/3.1/cglib-3.1.jar"/>
+					</artifact>
+					<artifact name="cglib" type="doc" ext="jar" extra-classifier="javadoc" status="no" details="" size="389012" time="0" location="C:\Users\yayan\.ivy2\cache\cglib\cglib\docs\cglib-3.1-javadoc.jar">
+						<origin-location is-local="false" location="http://repo1.maven.org/maven2/cglib/cglib/3.1/cglib-3.1-javadoc.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.ow2.asm" name="asm">
+			<revision name="4.2" status="release" pubdate="20131012160117" resolver="sbt-chain" artresolver="sbt-chain" homepage="" downloaded="false" searched="false" default="false" conf="default(compile), default, compile, runtime, master" position="5">
+				<metadata-artifact status="no" details="" size="3781" time="0" location="C:\Users\yayan\.ivy2\cache\org.ow2.asm\asm\ivy-4.2.xml" searched="false" origin-is-local="false" origin-location="http://repo1.maven.org/maven2/org/ow2/asm/asm/4.2/asm-4.2.pom"/>
+				<caller organisation="default" name="lemon-java$sources_javadoc_2.10" conf="optional, compile, provided, compile-internal" rev="4.2" rev-constraint-default="4.2" rev-constraint-dynamic="4.2" callerrev="0.1-SNAPSHOT"/>
+				<artifacts>
+					<artifact name="asm" type="doc" ext="jar" extra-classifier="javadoc" status="no" details="" size="1518728" time="0" location="C:\Users\yayan\.ivy2\cache\org.ow2.asm\asm\docs\asm-4.2-javadoc.jar">
+						<origin-location is-local="false" location="http://repo1.maven.org/maven2/org/ow2/asm/asm/4.2/asm-4.2-javadoc.jar"/>
+					</artifact>
+					<artifact name="asm" type="jar" ext="jar" status="no" details="" size="47895" time="0" location="C:\Users\yayan\.ivy2\cache\org.ow2.asm\asm\jars\asm-4.2.jar">
+						<origin-location is-local="false" location="http://repo1.maven.org/maven2/org/ow2/asm/asm/4.2/asm-4.2.jar"/>
+					</artifact>
+					<artifact name="asm" type="src" ext="jar" extra-classifier="sources" status="no" details="" size="984928" time="0" location="C:\Users\yayan\.ivy2\cache\org.ow2.asm\asm\srcs\asm-4.2-sources.jar">
+						<origin-location is-local="false" location="http://repo1.maven.org/maven2/org/ow2/asm/asm/4.2/asm-4.2-sources.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="ch.qos.logback" name="logback-classic">
+			<revision name="1.0.13" status="release" pubdate="20130510203446" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://logback.qos.ch" downloaded="false" searched="false" default="false" conf="default(compile), default, compile, runtime, master" position="3">
+				<license name="Eclipse Public License - v 1.0" url="http://www.eclipse.org/legal/epl-v10.html"/>
+				<license name="GNU Lesser General Public License" url="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html"/>
+				<metadata-artifact status="no" details="" size="10354" time="0" location="C:\Users\yayan\.ivy2\cache\ch.qos.logback\logback-classic\ivy-1.0.13.xml" searched="false" origin-is-local="false" origin-location="http://repo1.maven.org/maven2/ch/qos/logback/logback-classic/1.0.13/logback-classic-1.0.13.pom"/>
+				<caller organisation="default" name="lemon-java$sources_javadoc_2.10" conf="optional, compile, provided, compile-internal" rev="1.0.13" rev-constraint-default="1.0.13" rev-constraint-dynamic="1.0.13" callerrev="0.1-SNAPSHOT"/>
+				<artifacts>
+					<artifact name="logback-classic" type="doc" ext="jar" extra-classifier="javadoc" status="no" details="" size="1025971" time="0" location="C:\Users\yayan\.ivy2\cache\ch.qos.logback\logback-classic\docs\logback-classic-1.0.13-javadoc.jar">
+						<origin-location is-local="false" location="http://repo1.maven.org/maven2/ch/qos/logback/logback-classic/1.0.13/logback-classic-1.0.13-javadoc.jar"/>
+					</artifact>
+					<artifact name="logback-classic" type="jar" ext="jar" status="no" details="" size="264600" time="0" location="C:\Users\yayan\.ivy2\cache\ch.qos.logback\logback-classic\jars\logback-classic-1.0.13.jar">
+						<origin-location is-local="false" location="http://repo1.maven.org/maven2/ch/qos/logback/logback-classic/1.0.13/logback-classic-1.0.13.jar"/>
+					</artifact>
+					<artifact name="logback-classic" type="src" ext="jar" extra-classifier="sources" status="no" details="" size="218648" time="0" location="C:\Users\yayan\.ivy2\cache\ch.qos.logback\logback-classic\srcs\logback-classic-1.0.13-sources.jar">
+						<origin-location is-local="false" location="http://repo1.maven.org/maven2/ch/qos/logback/logback-classic/1.0.13/logback-classic-1.0.13-sources.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="ch.qos.logback" name="logback-core">
+			<revision name="1.0.13" status="release" pubdate="20130510203314" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://logback.qos.ch" downloaded="false" searched="false" default="false" conf="default(compile), default, compile, runtime, master" position="2">
+				<license name="Eclipse Public License - v 1.0" url="http://www.eclipse.org/legal/epl-v10.html"/>
+				<license name="GNU Lesser General Public License" url="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html"/>
+				<metadata-artifact status="no" details="" size="9614" time="0" location="C:\Users\yayan\.ivy2\cache\ch.qos.logback\logback-core\ivy-1.0.13.xml" searched="false" origin-is-local="false" origin-location="http://repo1.maven.org/maven2/ch/qos/logback/logback-core/1.0.13/logback-core-1.0.13.pom"/>
+				<caller organisation="default" name="lemon-java$sources_javadoc_2.10" conf="optional, compile, provided, compile-internal" rev="1.0.13" rev-constraint-default="1.0.13" rev-constraint-dynamic="1.0.13" callerrev="0.1-SNAPSHOT"/>
+				<artifacts>
+					<artifact name="logback-core" type="src" ext="jar" extra-classifier="sources" status="no" details="" size="363737" time="0" location="C:\Users\yayan\.ivy2\cache\ch.qos.logback\logback-core\srcs\logback-core-1.0.13-sources.jar">
+						<origin-location is-local="false" location="http://repo1.maven.org/maven2/ch/qos/logback/logback-core/1.0.13/logback-core-1.0.13-sources.jar"/>
+					</artifact>
+					<artifact name="logback-core" type="doc" ext="jar" extra-classifier="javadoc" status="no" details="" size="1874335" time="0" location="C:\Users\yayan\.ivy2\cache\ch.qos.logback\logback-core\docs\logback-core-1.0.13-javadoc.jar">
+						<origin-location is-local="false" location="http://repo1.maven.org/maven2/ch/qos/logback/logback-core/1.0.13/logback-core-1.0.13-javadoc.jar"/>
+					</artifact>
+					<artifact name="logback-core" type="jar" ext="jar" status="no" details="" size="418870" time="0" location="C:\Users\yayan\.ivy2\cache\ch.qos.logback\logback-core\jars\logback-core-1.0.13.jar">
+						<origin-location is-local="false" location="http://repo1.maven.org/maven2/ch/qos/logback/logback-core/1.0.13/logback-core-1.0.13.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.slf4j" name="slf4j-api">
+			<revision name="1.7.5" status="release" pubdate="20130326045215" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.slf4j.org" downloaded="false" searched="false" default="false" conf="default(compile), default, compile, runtime, master" position="1">
+				<metadata-artifact status="no" details="" size="4514" time="0" location="C:\Users\yayan\.ivy2\cache\org.slf4j\slf4j-api\ivy-1.7.5.xml" searched="false" origin-is-local="false" origin-location="http://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.5/slf4j-api-1.7.5.pom"/>
+				<caller organisation="default" name="lemon-java$sources_javadoc_2.10" conf="optional, compile, provided, compile-internal" rev="1.7.5" rev-constraint-default="1.7.5" rev-constraint-dynamic="1.7.5" callerrev="0.1-SNAPSHOT"/>
+				<artifacts>
+					<artifact name="slf4j-api" type="doc" ext="jar" extra-classifier="javadoc" status="no" details="" size="183075" time="0" location="C:\Users\yayan\.ivy2\cache\org.slf4j\slf4j-api\docs\slf4j-api-1.7.5-javadoc.jar">
+						<origin-location is-local="false" location="http://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.5/slf4j-api-1.7.5-javadoc.jar"/>
+					</artifact>
+					<artifact name="slf4j-api" type="src" ext="jar" extra-classifier="sources" status="no" details="" size="47186" time="0" location="C:\Users\yayan\.ivy2\cache\org.slf4j\slf4j-api\srcs\slf4j-api-1.7.5-sources.jar">
+						<origin-location is-local="false" location="http://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.5/slf4j-api-1.7.5-sources.jar"/>
+					</artifact>
+					<artifact name="slf4j-api" type="jar" ext="jar" status="no" details="" size="26084" time="0" location="C:\Users\yayan\.ivy2\cache\org.slf4j\slf4j-api\jars\slf4j-api-1.7.5.jar">
+						<origin-location is-local="false" location="http://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.5/slf4j-api-1.7.5.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.scala-lang" name="scala-library">
+			<revision name="2.10.3" status="release" pubdate="20130927174454" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.scala-lang.org/" extra-info.apiURL="http://www.scala-lang.org/api/2.10.3/" downloaded="false" searched="false" default="false" conf="default(compile), default, compile, runtime, master" position="0">
+				<license name="BSD-like" url="http://www.scala-lang.org/downloads/license.html          "/>
+				<metadata-artifact status="no" details="" size="2616" time="0" location="C:\Users\yayan\.ivy2\cache\org.scala-lang\scala-library\ivy-2.10.3.xml" searched="false" origin-is-local="false" origin-location="http://repo1.maven.org/maven2/org/scala-lang/scala-library/2.10.3/scala-library-2.10.3.pom"/>
+				<caller organisation="default" name="lemon-java$sources_javadoc_2.10" conf="optional, compile, provided, compile-internal" rev="2.10.3" rev-constraint-default="2.10.3" rev-constraint-dynamic="2.10.3" callerrev="0.1-SNAPSHOT" extra-info.apiURL="http://www.scala-lang.org/api/2.10.3/"/>
+				<artifacts>
+					<artifact name="scala-library" type="jar" ext="jar" status="no" details="" size="7126003" time="0" location="C:\Users\yayan\.ivy2\cache\org.scala-lang\scala-library\jars\scala-library-2.10.3.jar">
+						<origin-location is-local="false" location="http://repo1.maven.org/maven2/org/scala-lang/scala-library/2.10.3/scala-library-2.10.3.jar"/>
+					</artifact>
+					<artifact name="scala-library" type="doc" ext="jar" extra-classifier="javadoc" status="no" details="" size="33911475" time="0" location="C:\Users\yayan\.ivy2\cache\org.scala-lang\scala-library\docs\scala-library-2.10.3-javadoc.jar">
+						<origin-location is-local="false" location="http://repo1.maven.org/maven2/org/scala-lang/scala-library/2.10.3/scala-library-2.10.3-javadoc.jar"/>
+					</artifact>
+					<artifact name="scala-library" type="src" ext="jar" extra-classifier="sources" status="no" details="" size="1062304" time="0" location="C:\Users\yayan\.ivy2\cache\org.scala-lang\scala-library\srcs\scala-library-2.10.3-sources.jar">
+						<origin-location is-local="false" location="http://repo1.maven.org/maven2/org/scala-lang/scala-library/2.10.3/scala-library-2.10.3-sources.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+	</dependencies>
+</ivy-report>

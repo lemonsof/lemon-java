@@ -1,0 +1,5 @@
+namespace lemon.java
+
+message Java{ string mapping; }
+
+

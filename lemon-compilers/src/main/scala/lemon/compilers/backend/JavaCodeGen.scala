@@ -2,8 +2,9 @@ package lemon.compilers.backend
 import java.io.File
 import com.sun.codemodel._
 import lemon.messages.reflect._
+import lemon.compilers.CompileService
 
-class JavaCodeGen(output:File,types:Iterable[IR]) extends JavaBackend{
+class JavaCodeGen(output:File,types:Iterable[IR]) extends JavaBackend {
 
   private val _codeModel = new JCodeModel
 
@@ -29,6 +30,8 @@ class JavaCodeGen(output:File,types:Iterable[IR]) extends JavaBackend{
   override protected def omit(message: Message_): JDefinedClass = {
     val model = codeModel._class(message.Name)
 
+    model._implements(classOf[lemon.messages.io.PortableMessage])
+
     message.extend.foreach{
       extend => model._extends(codeModel.ref(extend.Name))
     }
@@ -53,7 +56,7 @@ class JavaCodeGen(output:File,types:Iterable[IR]) extends JavaBackend{
     val methodName = field.name.charAt(0).toUpper + field.name.substring(1)
     val filedModel = field.fieldType match {
       case Array_(valType,length) =>
-        val fieldModel = model.field(JMod.PRIVATE|JMod.FINAL,jType,field.name)
+        val fieldModel = model.field(JMod.PRIVATE,jType,field.name)
         fieldModel.init(JExpr.newArray(getJType(valType),length))
         val getMethod = model.method(JMod.PUBLIC,jType,"get" + methodName)
         getMethod.body()._return(JExpr._this().ref(fieldModel))
@@ -62,7 +65,7 @@ class JavaCodeGen(output:File,types:Iterable[IR]) extends JavaBackend{
         val fieldModel = model.field(JMod.PRIVATE,jType,field.name)
         val getMethod = model.method(JMod.PUBLIC,jType,"get" + methodName)
         getMethod.body()._return(JExpr._this().ref(fieldModel))
-        val setMethod = model.method(JMod.PUBLIC,jType,"set" + methodName)
+        val setMethod = model.method(JMod.PUBLIC,codeModel.VOID,"set" + methodName)
         val setParam = setMethod.param(JMod.FINAL,jType,field.name)
         setMethod.body().assign(JExpr._this().ref(fieldModel),setParam)
         fieldModel
@@ -81,4 +84,13 @@ class JavaCodeGen(output:File,types:Iterable[IR]) extends JavaBackend{
                                attribute: Attribute_,
                                model: JDefinedClass,
                                fieldModel: JFieldVar): Option[JAnnotationUse] = None
+}
+
+
+object JavaCodeGen {
+  def gen(output:File,types:Iterable[IR]){
+    val codeGen = new JavaCodeGen(output,CompileService.builtinTypes.values) with JavaCloneCodeGen with JavaWriterCodeGen with JavaReaderCodeGen
+
+    codeGen.gen()
+  }
 }
