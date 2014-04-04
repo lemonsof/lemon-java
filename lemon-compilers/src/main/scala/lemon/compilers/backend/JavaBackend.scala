@@ -18,7 +18,6 @@ import lemon.messages.reflect.Field_
 abstract class JavaBackend {
   protected def codeModel:JCodeModel
 
-
   protected def omit(enum:Enum_):JDefinedClass
 
   protected def omit(enum:Enum_,attribute:Attribute_,model :JDefinedClass):Option[JAnnotationUse]
@@ -114,6 +113,8 @@ abstract class JavaBackend {
             codeModel.ref(classOf[java.lang.Double])
           }
       }
+      case message:Message_ => codeModel.ref(message.name)
+      case enum:Enum_ => codeModel.ref(enum.name)
       case Ref_(name) => codeModel.ref(name)
       case _:Boolean_ => codeModel.BOOLEAN
     }

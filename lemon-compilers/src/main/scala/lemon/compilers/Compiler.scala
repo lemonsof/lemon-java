@@ -35,10 +35,19 @@ object CompileService extends MetaDataResolver{
 
   lazy val builtinTypes = BuiltinCompiler.compile()
 
-  private val metaData = new ConcurrentHashMap[String, util.concurrent.ConcurrentMap[String, Any]].asScala
+  val metaData = new ConcurrentHashMap[String, util.concurrent.ConcurrentMap[String, Any]].asScala
+
+  val symbolTable = new ConcurrentHashMap[String,IR].asScala
+
+  symbolTable ++= builtinTypes
 
   def compile(files :Array[File]) : Map[String,IR] = {
-    load(Linker.link(files.map { file=> new Script(file) })) ++ builtinTypes
+
+    val linked = Linker.link(files.map { file=> new Script(file) })
+
+    symbolTable ++= linked
+
+    load(linked)
   }
 
   def reset(){
@@ -62,7 +71,7 @@ object CompileService extends MetaDataResolver{
       case Message_(_,fields,_,attributes) =>
         fields.foreach(load(fullPath,_))
         attributes.foreach(load(fullPath,_))
-      case Enum_(_,_,attributes) =>
+      case Enum_(_,_,_,attributes) =>
         attributes.foreach(load(fullPath,_))
       case Service_(_,methods,_,attributes) =>
         methods.foreach(load(fullPath,_))

@@ -2,7 +2,7 @@ package lemon.compilers.backend
 
 import com.sun.codemodel._
 import lemon.messages.reflect._
-import lemon.messages.ConstraintException
+import lemon.messages.{UnknownSymbolException, UnknownEnumValueException, EnumValue, ConstraintException}
 import lemon.messages.reflect.Boolean_
 import lemon.messages.reflect.Array_
 import lemon.messages.reflect.Fixed_
@@ -13,6 +13,7 @@ import lemon.messages.reflect.Ref_
 import lemon.messages.reflect.List_
 import lemon.messages.reflect.Field_
 import lemon.messages.io.SeqReader
+import lemon.compilers.CompileService
 
 trait JavaReaderCodeGen extends JavaBackend{
 
@@ -53,6 +54,16 @@ trait JavaReaderCodeGen extends JavaBackend{
   private def readField(field:Field_,target:JAssignmentTarget,block:JBlock,reader:JExpression){
     field.fieldType match {
       case ref:Ref_ =>
+        if(!CompileService.symbolTable.contains(ref.name)){
+          throw new UnknownSymbolException(ref.name)
+        }
+        readField(
+          field.copy(fieldType = CompileService.symbolTable(ref.name).asInstanceOf[Type_]),
+          target,
+          block,
+          reader)
+      case message:Message_ =>
+
         block.assign(target,JExpr._new(getJType(field.fieldType)))
         block.invoke(target,"read")
           .arg(
@@ -90,6 +101,27 @@ trait JavaReaderCodeGen extends JavaBackend{
         block.assign(target, block.invoke(reader,"readBoolean")
           .arg(JExpr.lit(field.name))
           .arg(JExpr.lit(field.id)))
+
+      case enum:Enum_ =>
+        val enumValue = block.decl(codeModel.ref(classOf[EnumValue]),field.name,reader.invoke("readEnum")
+          .arg(JExpr.lit(field.name))
+          .arg(JExpr.lit(field.id))
+          .arg(JExpr.lit(enum.length)))
+
+        val _if = block._if(enumValue.invoke("getName").eq(JExpr._null()))
+
+        val _loop = _if._then().forEach(codeModel.ref(enum.name),"current",codeModel.ref(enum.name).staticInvoke("values"))
+
+        _loop.body()._if(_loop.`var`().invoke("getValue").eq(enumValue.invoke("getValue")))
+          ._then()
+          .assign(target,_loop.`var`())
+          ._break()
+
+        _if._then()._if(target.eq(JExpr._null()))._then()
+          ._throw(JExpr._new(codeModel.ref(classOf[UnknownEnumValueException]))
+          .arg(JExpr.lit(enum.name)).arg(enumValue.invoke("getValue")))
+
+        _if._else().assign(target,_if._else().staticInvoke(codeModel.ref(enum.name),"valueOf").arg(enumValue.invoke("getName")))
 
       case Array_(valType,length) =>
         val seqReader = block.decl(
@@ -154,6 +186,12 @@ trait JavaReaderCodeGen extends JavaBackend{
   private def read(valType:Type_,reader:JExpression,block:JBlock,stack:Int):JExpression = {
     valType match {
       case ref:Ref_ =>
+        if(!CompileService.symbolTable.contains(ref.name)){
+          throw new UnknownSymbolException(ref.name)
+        }
+        read(CompileService.symbolTable(ref.name).asInstanceOf[Type_],reader,block,stack)
+      case message:Message_ =>
+
         val message = block.decl(getJType(valType),"message" + stack,JExpr._new(getJType(valType)))
 
         val messageReader = block.decl(
@@ -178,6 +216,28 @@ trait JavaReaderCodeGen extends JavaBackend{
         reader.invoke("readString")
       case _:Boolean_ =>
         reader.invoke("readBoolean")
+
+      case enum:Enum_ =>
+        val target = block.decl(getJType(valType),"enum" + stack,JExpr._null())
+
+        val enumValue = block.decl(codeModel.ref(classOf[EnumValue]),"enumValue"+ stack, reader.invoke("readEnum").arg(JExpr.lit(enum.length)))
+
+        val _if = block._if(enumValue.invoke("getName").eq(JExpr._null()))
+
+        val _loop = _if._then().forEach(codeModel.ref(enum.name),"current",codeModel.ref(enum.name).staticInvoke("values"))
+
+        _loop.body()._if(_loop.`var`().invoke("getValue").eq(enumValue.invoke("getValue")))
+          ._then()
+          .assign(target,_loop.`var`())
+          ._break()
+
+        _if._then()._if(target.eq(JExpr._null()))._then()
+          ._throw(JExpr._new(codeModel.ref(classOf[UnknownEnumValueException]))
+          .arg(JExpr.lit(enum.name)).arg(enumValue.invoke("getValue")))
+
+        _if._else().assign(target,_if._else().staticInvoke(codeModel.ref(enum.name),"valueOf").arg(enumValue.invoke("getName")))
+
+        target
 
       case List_(childValType) =>
 

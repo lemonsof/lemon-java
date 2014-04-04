@@ -4,7 +4,9 @@ import com.sun.codemodel._
 import lemon.messages.reflect._
 import lemon.messages.reflect.Field_
 import lemon.messages.reflect.Message_
-import lemon.messages.{EnumValue, ConstraintException}
+import lemon.messages.reflect.Type_
+import lemon.messages.{UnknownSymbolException, EnumValue, ConstraintException}
+import lemon.compilers.CompileService
 
 
 trait JavaWriterCodeGen extends JavaBackend{
@@ -50,6 +52,19 @@ trait JavaWriterCodeGen extends JavaBackend{
 
     field.fieldType match {
       case ref:Ref_ =>
+        if(!CompileService.symbolTable.contains(ref.name)){
+          throw new UnknownSymbolException(ref.name)
+        }
+
+        writeField(
+          field.copy(fieldType = CompileService.symbolTable(ref.name).asInstanceOf[Type_]),
+          source,
+          block,
+          attributes,
+          writer,
+          resolver)
+
+      case message:Message_ =>
         block._if(source.eq(JExpr._null()).not())._then()
           .add(source.invoke("write").arg(writer.invoke("writeMessage")
           .arg(JExpr.lit(field.name))
@@ -167,6 +182,12 @@ trait JavaWriterCodeGen extends JavaBackend{
   def write(valType:Type_,writer:JExpression,source:JExpression,block:JBlock,resolver:JExpression,stack:Int = 0) {
     valType match {
       case ref:Ref_ =>
+        if(!CompileService.symbolTable.contains(ref.name)){
+          throw new UnknownSymbolException(ref.name)
+        }
+
+        write(CompileService.symbolTable(ref.name).asInstanceOf[Type_],writer,source,block,resolver)
+      case message:Message_ =>
         block.add(source.invoke("write").arg(writer.invoke("writeMessage")).arg(resolver))
       case Var_(length,signed) =>
         block.invoke(writer,"writeVar")

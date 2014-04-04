@@ -49,4 +49,5 @@ trait SeqWriter{
   def writeMap():SeqWriter
   def writeFloat(value:Float)
   def writeDouble(value:Double)
+  def writeEnum(length:Int,value:EnumValue)
 }

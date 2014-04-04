@@ -3,6 +3,7 @@ package lemon.compilers.frontend
 import lemon.messages.reflect._
 import scala.Some
 import lemon.messages.reflect.Attribute_
+import lemon.compilers.CompileService
 
 case class LinkContext(script:Script_,symbols :Map[String,IR])
 
@@ -112,7 +113,7 @@ object Linker {
   }
 
   private def link(attribute : Attribute_)(implicit context :LinkContext) : Attribute_ = {
-    val symbols = context.symbols
+    val symbols = context.symbols ++ CompileService.symbolTable
     val script = context.script
     //first try to link symbol in same script
     val symbol = script.types.find {

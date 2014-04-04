@@ -14,9 +14,8 @@ message Manifest{
     string              version;
     double              description;
     list<string>        actors;
-    GlobalName[10]      clients;
+    ServiceType[10]     clients;
     int32_f[10]          others;
-    int32               hello;
 }
 
 message ManifestV2 :Manifest{

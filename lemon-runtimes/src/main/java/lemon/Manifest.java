@@ -1,12 +1,17 @@
 
 package lemon;
 
-import lemon.messages.ConstraintException;
-import lemon.messages.io.*;
-import lemon.messages.reflect.MetaDataResolver;
-
 import java.util.ArrayList;
 import java.util.List;
+import lemon.messages.ConstraintException;
+import lemon.messages.EnumValue;
+import lemon.messages.UnknownEnumValueException;
+import lemon.messages.io.PortableMessage;
+import lemon.messages.io.Reader;
+import lemon.messages.io.SeqReader;
+import lemon.messages.io.SeqWriter;
+import lemon.messages.io.Writer;
+import lemon.messages.reflect.MetaDataResolver;
 
 public class Manifest
     implements PortableMessage
@@ -16,9 +21,8 @@ public class Manifest
     private String version;
     private double description;
     private List<String> actors;
-    private lemon.GlobalName[] clients = new lemon.GlobalName[ 10 ] ;
+    private lemon.ServiceType[] clients = new lemon.ServiceType[ 10 ] ;
     private int[] others = new int[ 10 ] ;
-    private int hello;
 
     public lemon.GlobalName getAppName() {
         return this.appName;
@@ -52,20 +56,12 @@ public class Manifest
         this.actors = actors;
     }
 
-    public lemon.GlobalName[] getClients() {
+    public lemon.ServiceType[] getClients() {
         return this.clients;
     }
 
     public int[] getOthers() {
         return this.others;
-    }
-
-    public int getHello() {
-        return this.hello;
-    }
-
-    public void setHello(final int hello) {
-        this.hello = hello;
     }
 
     public Manifest clone(final Manifest target) {
@@ -77,13 +73,12 @@ public class Manifest
             actors0 .add(actors0_);
         }
         target.actors = actors0;
-        lemon.GlobalName[] clients0 = new lemon.GlobalName[ 10 ] ;
+        lemon.ServiceType[] clients0 = new lemon.ServiceType[ 10 ] ;
         System.arraycopy(this.clients, 0, clients0, 0, 10);
         target.clients = clients0;
         int[] others0 = new int[ 10 ] ;
         System.arraycopy(this.others, 0, others0, 0, 10);
         target.others = others0;
-        target.hello = this.hello;
         return target;
     }
 
@@ -98,27 +93,26 @@ public class Manifest
         }
         writer.writeDouble("description", 2, this.description, resolver.resolve("lemon.Manifest.description"));
         if (!(this.actors == null)) {
-            SeqWriter actorsWriter = writer.writeList("actors", 3);
+            SeqWriter actorsWriter = writer.writeList("actors", 3, resolver.resolve("lemon.Manifest.actors"));
             for (String current0 : this.actors) {
                 actorsWriter.writeNext();
                 actorsWriter.writeString(current0);
             }
         }
         if (!(this.clients == null)) {
-            SeqWriter clientsWriter = writer.writeArray("clients", 4, 10);
-            for (lemon.GlobalName current0 : this.clients) {
+            SeqWriter clientsWriter = writer.writeArray("clients", 4, 10, resolver.resolve("lemon.Manifest.clients"));
+            for (lemon.ServiceType current0 : this.clients) {
                 clientsWriter.writeNext();
-                current0 .write(clientsWriter.writeMessage(), resolver);
+                clientsWriter.writeEnum(1, new EnumValue(current0 .toString(), current0 .getValue()));
             }
         }
         if (!(this.others == null)) {
-            SeqWriter othersWriter = writer.writeArray("others", 5, 10);
+            SeqWriter othersWriter = writer.writeArray("others", 5, 10, resolver.resolve("lemon.Manifest.others"));
             for (int current0 : this.others) {
                 othersWriter.writeNext();
                 othersWriter.writeFixed(4, true, current0);
             }
         }
-        writer.writeVar("hello", 6, 4, true, this.hello, resolver.resolve("lemon.Manifest.hello"));
         writer.end();
     }
 
@@ -153,10 +147,23 @@ public class Manifest
         try {
             SeqReader clientsReader = read.readArray("clients", 4, 10);
             for (int i = 0; ((i< 10)&&clientsReader.readNext()); i ++) {
-                lemon.GlobalName message1 = new lemon.GlobalName();
-                Reader messageReader1 = clientsReader.readMessage();
-                message1 .read(messageReader1);
-                this.clients[i] = message1;
+                lemon.ServiceType enum1 = null;
+                EnumValue enumValue1 = clientsReader.readEnum(1);
+                if (enumValue1 .getName() == null) {
+                    for (lemon.ServiceType current: lemon.ServiceType.values()) {
+                        if (current.getValue() == enumValue1 .getValue()) {
+                            enum1 = current;
+                            break;
+                        }
+                    }
+                    if (enum1 == null) {
+                        throw new UnknownEnumValueException("lemon.ServiceType", enumValue1 .getValue());
+                    }
+                } else {
+                    lemon.ServiceType.valueOf(enumValue1 .getName());
+                    enum1 = lemon.ServiceType.valueOf(enumValue1 .getName());
+                }
+                this.clients[i] = enum1;
             }
         } catch (ConstraintException ignored) {
         }
@@ -165,11 +172,6 @@ public class Manifest
             for (int i = 0; ((i< 10)&&othersReader.readNext()); i ++) {
                 this.others[i] = ((int) othersReader.readFixed(4, true));
             }
-        } catch (ConstraintException ignored) {
-        }
-        try {
-            read.readVar("hello", 6, 4, true);
-            this.hello = ((int) read.readVar("hello", 6, 4, true));
         } catch (ConstraintException ignored) {
         }
     }

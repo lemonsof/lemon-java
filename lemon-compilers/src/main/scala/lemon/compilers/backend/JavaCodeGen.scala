@@ -39,6 +39,8 @@ class JavaCodeGen(output:File,types:Iterable[IR]) extends JavaBackend {
 
     constructor.body().assign(JExpr._this().ref("value"),param)
 
+    model.method(JMod.PUBLIC,classOf[Long],"getValue").body()._return(JExpr._this().ref("value"))
+
     enum.attributes.foreach{
       attribute => omit(enum,attribute,model)
     }
@@ -120,7 +122,7 @@ class JavaCodeGen(output:File,types:Iterable[IR]) extends JavaBackend {
 
 object JavaCodeGen {
   def gen(output:File,types:Iterable[IR]){
-    val codeGen = new JavaCodeGen(output,CompileService.builtinTypes.values) with JavaCloneCodeGen with JavaWriterCodeGen with JavaReaderCodeGen
+    val codeGen = new JavaCodeGen(output,types) with JavaCloneCodeGen with JavaWriterCodeGen with JavaReaderCodeGen
 
     codeGen.gen()
   }

@@ -89,7 +89,7 @@ public class ManifestV2
         writer.begin(resolver.resolve("lemon.ManifestV2"));
         super.write(writer.writeSupper(), resolver);
         if (!(this.properties == null)) {
-            SeqWriter propertiesWriter = writer.writeMap("properties", 0);
+            SeqWriter propertiesWriter = writer.writeMap("properties", 0, resolver.resolve("lemon.ManifestV2.properties"));
             for (Map.Entry<String, String> entry0 : this.properties.entrySet()) {
                 propertiesWriter.writeNext();
                 propertiesWriter.writeString(entry0 .getKey());
@@ -97,7 +97,7 @@ public class ManifestV2
             }
         }
         if (!(this.actors2 == null)) {
-            SeqWriter actors2Writer = writer.writeList("actors2", 1);
+            SeqWriter actors2Writer = writer.writeList("actors2", 1, resolver.resolve("lemon.ManifestV2.actors2"));
             for (List<String> current0 : this.actors2) {
                 actors2Writer.writeNext();
                 SeqWriter writer1 = actors2Writer.writeList();
@@ -108,7 +108,7 @@ public class ManifestV2
             }
         }
         if (!(this.properties2 == null)) {
-            SeqWriter properties2Writer = writer.writeMap("properties2", 2);
+            SeqWriter properties2Writer = writer.writeMap("properties2", 2, resolver.resolve("lemon.ManifestV2.properties2"));
             for (Map.Entry<String, Map<String, Integer>> entry0 : this.properties2 .entrySet()) {
                 properties2Writer.writeNext();
                 properties2Writer.writeString(entry0 .getKey());
