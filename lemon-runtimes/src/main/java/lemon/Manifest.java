@@ -1,15 +1,12 @@
 
 package lemon;
 
+import lemon.messages.ConstraintException;
+import lemon.messages.io.*;
+import lemon.messages.reflect.MetaDataResolver;
+
 import java.util.ArrayList;
 import java.util.List;
-import lemon.messages.ConstraintException;
-import lemon.messages.io.PortableMessage;
-import lemon.messages.io.Reader;
-import lemon.messages.io.SeqReader;
-import lemon.messages.io.SeqWriter;
-import lemon.messages.io.Writer;
-import lemon.messages.reflect.MetaDataResolver;
 
 public class Manifest
     implements PortableMessage
@@ -17,7 +14,7 @@ public class Manifest
 
     private lemon.GlobalName appName;
     private String version;
-    private String description;
+    private double description;
     private List<String> actors;
     private lemon.GlobalName[] clients = new lemon.GlobalName[ 10 ] ;
     private int[] others = new int[ 10 ] ;
@@ -39,11 +36,11 @@ public class Manifest
         this.version = version;
     }
 
-    public String getDescription() {
+    public double getDescription() {
         return this.description;
     }
 
-    public void setDescription(final String description) {
+    public void setDescription(final double description) {
         this.description = description;
     }
 
@@ -97,33 +94,31 @@ public class Manifest
             this.appName.write(writer.writeMessage("appName", 0, resolver.resolve("lemon.Manifest.appName")), resolver);
         }
         if (!(this.version == null)) {
-            writer.writeString("version", 0, this.version, resolver.resolve("lemon.Manifest.version"));
+            writer.writeString("version", 1, this.version, resolver.resolve("lemon.Manifest.version"));
         }
-        if (!(this.description == null)) {
-            writer.writeString("description", 0, this.description, resolver.resolve("lemon.Manifest.description"));
-        }
+        writer.writeDouble("description", 2, this.description, resolver.resolve("lemon.Manifest.description"));
         if (!(this.actors == null)) {
-            SeqWriter actorsWriter = writer.writeList("actors", 0);
+            SeqWriter actorsWriter = writer.writeList("actors", 3);
             for (String current0 : this.actors) {
                 actorsWriter.writeNext();
                 actorsWriter.writeString(current0);
             }
         }
         if (!(this.clients == null)) {
-            SeqWriter clientsWriter = writer.writeArray("clients", 0, 10);
+            SeqWriter clientsWriter = writer.writeArray("clients", 4, 10);
             for (lemon.GlobalName current0 : this.clients) {
                 clientsWriter.writeNext();
                 current0 .write(clientsWriter.writeMessage(), resolver);
             }
         }
         if (!(this.others == null)) {
-            SeqWriter othersWriter = writer.writeArray("others", 0, 10);
+            SeqWriter othersWriter = writer.writeArray("others", 5, 10);
             for (int current0 : this.others) {
                 othersWriter.writeNext();
                 othersWriter.writeFixed(4, true, current0);
             }
         }
-        writer.writeVar("hello", 0, 4, true, this.hello, resolver.resolve("lemon.Manifest.hello"));
+        writer.writeVar("hello", 6, 4, true, this.hello, resolver.resolve("lemon.Manifest.hello"));
         writer.end();
     }
 
@@ -138,25 +133,25 @@ public class Manifest
         } catch (ConstraintException ignored) {
         }
         try {
-            read.readString("version", 0);
-            this.version = read.readString("version", 0);
+            read.readString("version", 1);
+            this.version = read.readString("version", 1);
         } catch (ConstraintException ignored) {
         }
         try {
-            read.readString("description", 0);
-            this.description = read.readString("description", 0);
+            read.readDouble("description", 2);
+            this.description = read.readDouble("description", 2);
         } catch (ConstraintException ignored) {
         }
         try {
             this.actors = new ArrayList<String>();
-            SeqReader actorsReader = read.readList("actors", 0);
+            SeqReader actorsReader = read.readList("actors", 3);
             while (actorsReader.readNext()) {
                 this.actors.add(actorsReader.readString());
             }
         } catch (ConstraintException ignored) {
         }
         try {
-            SeqReader clientsReader = read.readArray("clients", 0, 10);
+            SeqReader clientsReader = read.readArray("clients", 4, 10);
             for (int i = 0; ((i< 10)&&clientsReader.readNext()); i ++) {
                 lemon.GlobalName message1 = new lemon.GlobalName();
                 Reader messageReader1 = clientsReader.readMessage();
@@ -166,15 +161,15 @@ public class Manifest
         } catch (ConstraintException ignored) {
         }
         try {
-            SeqReader othersReader = read.readArray("others", 0, 10);
+            SeqReader othersReader = read.readArray("others", 5, 10);
             for (int i = 0; ((i< 10)&&othersReader.readNext()); i ++) {
                 this.others[i] = ((int) othersReader.readFixed(4, true));
             }
         } catch (ConstraintException ignored) {
         }
         try {
-            read.readVar("hello", 0, 4, true);
-            this.hello = ((int) read.readVar("hello", 0, 4, true));
+            read.readVar("hello", 6, 4, true);
+            this.hello = ((int) read.readVar("hello", 6, 4, true));
         } catch (ConstraintException ignored) {
         }
     }

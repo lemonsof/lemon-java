@@ -12,6 +12,7 @@ import lemon.messages.reflect.Attribute_
 import lemon.messages.reflect.Enum_
 import lemon.messages.reflect.Message_
 import lemon.messages.reflect.Field_
+import lemon.messages.io.AttributeReader
 
 private object BuiltinCompiler {
   def compile():Map[String,IR] = {
@@ -34,7 +35,7 @@ object CompileService extends MetaDataResolver{
 
   lazy val builtinTypes = BuiltinCompiler.compile()
 
-  private val metaData = new ConcurrentHashMap[String, util.Map[String, Any]].asScala
+  private val metaData = new ConcurrentHashMap[String, util.concurrent.ConcurrentMap[String, Any]].asScala
 
   def compile(files :Array[File]) : Map[String,IR] = {
     load(Linker.link(files.map { file=> new Script(file) })) ++ builtinTypes
@@ -76,7 +77,19 @@ object CompileService extends MetaDataResolver{
 
   private def load(fullPath:String,attribute:Attribute_) {
     try{
-      Class.forName(attribute.valType.name)
+      if(metaData.contains(fullPath)){
+        metaData(fullPath).put(attribute.valType.name,AttributeReader.read(attribute))
+      } else {
+        val attributes = new ConcurrentHashMap[String,Any]
+
+        val old = metaData.putIfAbsent(fullPath,attributes)
+
+        if(old != None){
+          old.get.put(attribute.valType.name,AttributeReader.read(attribute))
+        } else {
+          attributes.put(attribute.valType.name,AttributeReader.read(attribute))
+        }
+      }
     } catch {
       case _: Throwable =>
     }

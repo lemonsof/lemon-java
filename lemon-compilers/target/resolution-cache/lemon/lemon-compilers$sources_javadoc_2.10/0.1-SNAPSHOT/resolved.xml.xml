@@ -4,7 +4,7 @@
 		module="lemon-compilers$sources_javadoc_2.10"
 		revision="0.1-SNAPSHOT"
 		status="integration"
-		publication="20140403134639"
+		publication="20140404085254"
 	/>
 	<configurations>
 		<conf name="compile" visibility="public" description=""/>

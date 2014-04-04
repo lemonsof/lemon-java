@@ -76,6 +76,16 @@ trait JavaReaderCodeGen extends JavaBackend{
           .arg(JExpr.lit(field.id))
           .arg(JExpr.lit(length))
           .arg(JExpr.lit(signed))))
+      case Float_(length) =>
+        if(length == 4){
+          block.assign(target, block.invoke(reader,"readFloat")
+            .arg(JExpr.lit(field.name))
+            .arg(JExpr.lit(field.id)))
+        } else {
+          block.assign(target, block.invoke(reader,"readDouble")
+            .arg(JExpr.lit(field.name))
+            .arg(JExpr.lit(field.id)))
+        }
       case _:Boolean_ =>
         block.assign(target, block.invoke(reader,"readBoolean")
           .arg(JExpr.lit(field.name))
@@ -157,6 +167,12 @@ trait JavaReaderCodeGen extends JavaBackend{
         JExpr.cast(getJType(valType),reader.invoke("readVar").arg(JExpr.lit(length)).arg(JExpr.lit(signed)))
       case Fixed_(length,signed) =>
         JExpr.cast(getJType(valType),reader.invoke("readFixed").arg(JExpr.lit(length)).arg(JExpr.lit(signed)))
+      case Float_(length) =>
+        if(length == 4){
+          reader.invoke("readFloat").arg(JExpr.lit(length))
+        } else {
+          reader.invoke("readDouble").arg(JExpr.lit(length))
+        }
       case _:String_ =>
         reader.invoke("readString")
       case _:Boolean_ =>

@@ -50,8 +50,8 @@ public class GlobalName
     public void write(final Writer writer, final MetaDataResolver resolver) {
         writer.begin(resolver.resolve("lemon.GlobalName"));
         writer.writeVar("group", 0, 4, true, this.group, resolver.resolve("lemon.GlobalName.group"));
-        writer.writeVar("id", 0, 4, true, this.id, resolver.resolve("lemon.GlobalName.id"));
-        writer.writeBoolean("status", 0, this.status, resolver.resolve("lemon.GlobalName.status"));
+        writer.writeVar("id", 1, 4, true, this.id, resolver.resolve("lemon.GlobalName.id"));
+        writer.writeBoolean("status", 2, this.status, resolver.resolve("lemon.GlobalName.status"));
         writer.end();
     }
 
@@ -65,13 +65,13 @@ public class GlobalName
         } catch (ConstraintException ignored) {
         }
         try {
-            read.readVar("id", 0, 4, true);
-            this.id = ((int) read.readVar("id", 0, 4, true));
+            read.readVar("id", 1, 4, true);
+            this.id = ((int) read.readVar("id", 1, 4, true));
         } catch (ConstraintException ignored) {
         }
         try {
-            read.readBoolean("status", 0);
-            this.status = read.readBoolean("status", 0);
+            read.readBoolean("status", 2);
+            this.status = read.readBoolean("status", 2);
         } catch (ConstraintException ignored) {
         }
     }

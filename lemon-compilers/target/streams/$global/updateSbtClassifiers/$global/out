@@ -613,9 +613,9 @@
 [debug] 	[NOT REQUIRED] org.scala-sbt#test-agent;0.13.0!test-agent.jar
 [debug] 	[NOT REQUIRED] org.scala-sbt#test-interface;1.0!test-interface.jar
 [debug] 	[NOT REQUIRED] org.scala-sbt#apply-macro;0.13.0!apply-macro.jar
-[debug] :: resolution report :: resolve 732ms :: artifacts dl 41ms
+[debug] :: resolution report :: resolve 693ms :: artifacts dl 38ms
 [debug] 	report for lemon#lemon-compilers$sbt_2.10;0.1-SNAPSHOT default produced in E:\Workspace\lemon-java\lemon-compilers\target\resolution-cache\reports\lemon-lemon-compilers$sbt_2.10-default.xml
-[debug] 	resolve done (732ms resolve - 41ms download)
+[debug] 	resolve done (693ms resolve - 38ms download)
 [debug] Using inline dependencies specified in Scala.
 [debug] :: resolving dependencies :: lemon#lemon-compilers$sources_2.10;0.1-SNAPSHOT
 [debug] 	confs: [default]
@@ -956,6 +956,6 @@
 [debug] 	[NOT REQUIRED] org.scala-sbt#precompiled-2_9_2;0.13.0!precompiled-2_9_2.jar(src)
 [debug] 	[NOT REQUIRED] org.scala-sbt#precompiled-2_9_3;0.13.0!precompiled-2_9_3.jar(src)
 [debug] 	[NOT REQUIRED] org.jetbrains#sbt-structure;2.3.1!sbt-structure.jar(src)
-[debug] :: resolution report :: resolve 168ms :: artifacts dl 57ms
+[debug] :: resolution report :: resolve 162ms :: artifacts dl 64ms
 [debug] 	report for lemon#lemon-compilers$sources_2.10;0.1-SNAPSHOT default produced in E:\Workspace\lemon-java\lemon-compilers\target\resolution-cache\reports\lemon-lemon-compilers$sources_2.10-default.xml
-[debug] 	resolve done (168ms resolve - 57ms download)
+[debug] 	resolve done (162ms resolve - 64ms download)

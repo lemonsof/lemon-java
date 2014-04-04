@@ -15,6 +15,10 @@ trait Reader {
   @throws[ConstraintException]
   def readString(name:String,id:Int):String
   @throws[ConstraintException]
+  def readFloat(name:String,id:Int):Float
+  @throws[ConstraintException]
+  def readDouble(name:String,id:Int):Double
+  @throws[ConstraintException]
   def readBoolean(name:String,id:Int):Boolean
   @throws[ConstraintException]
   def readArray(name:String,id:Int,length:Int):SeqReader
@@ -37,4 +41,6 @@ trait SeqReader{
   def readList():SeqReader
   def readSet():SeqReader
   def readMap():SeqReader
+  def readFloat():Float
+  def readDouble():Double
 }

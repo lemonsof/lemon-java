@@ -21,6 +21,7 @@ public class ManifestV2
     private Map<String, String> properties;
     private List<List<String>> actors2;
     private Map<String, Map<String, Integer>> properties2;
+    private float hello;
 
     public Map<String, String> getProperties() {
         return this.properties;
@@ -44,6 +45,14 @@ public class ManifestV2
 
     public void setProperties2(final Map<String, Map<String, Integer>> properties2) {
         this.properties2 = properties2;
+    }
+
+    public float getHello() {
+        return this.hello;
+    }
+
+    public void setHello(final float hello) {
+        this.hello = hello;
     }
 
     public ManifestV2 clone(final ManifestV2 target) {
@@ -71,6 +80,7 @@ public class ManifestV2
             properties20 .put(properties20_.getKey(), properties21);
         }
         target.properties2 = properties20;
+        target.hello = this.hello;
         return target;
     }
 
@@ -87,7 +97,7 @@ public class ManifestV2
             }
         }
         if (!(this.actors2 == null)) {
-            SeqWriter actors2Writer = writer.writeList("actors2", 0);
+            SeqWriter actors2Writer = writer.writeList("actors2", 1);
             for (List<String> current0 : this.actors2) {
                 actors2Writer.writeNext();
                 SeqWriter writer1 = actors2Writer.writeList();
@@ -98,7 +108,7 @@ public class ManifestV2
             }
         }
         if (!(this.properties2 == null)) {
-            SeqWriter properties2Writer = writer.writeMap("properties2", 0);
+            SeqWriter properties2Writer = writer.writeMap("properties2", 2);
             for (Map.Entry<String, Map<String, Integer>> entry0 : this.properties2 .entrySet()) {
                 properties2Writer.writeNext();
                 properties2Writer.writeString(entry0 .getKey());
@@ -110,6 +120,7 @@ public class ManifestV2
                 }
             }
         }
+        writer.writeFloat("hello", 3, this.hello, resolver.resolve("lemon.ManifestV2.hello"));
         writer.end();
     }
 
@@ -125,7 +136,7 @@ public class ManifestV2
         }
         try {
             this.actors2 = new ArrayList<List<String>>();
-            SeqReader actors2Reader = read.readList("actors2", 0);
+            SeqReader actors2Reader = read.readList("actors2", 1);
             while (actors2Reader.readNext()) {
                 ArrayList<String> list1 = new ArrayList<String>();
                 SeqReader reader1 = actors2Reader.readList();
@@ -138,7 +149,7 @@ public class ManifestV2
         }
         try {
             this.properties2 = new HashMap<String, Map<String, Integer>>();
-            SeqReader properties2Reader = read.readMap("properties2", 0);
+            SeqReader properties2Reader = read.readMap("properties2", 2);
             while (properties2Reader.readNext()) {
                 HashMap<String, Integer> map10 = new HashMap<String, Integer>();
                 SeqReader reader10 = properties2Reader.readMap();
@@ -147,6 +158,11 @@ public class ManifestV2
                 }
                 this.properties2 .put(properties2Reader.readString(), map10);
             }
+        } catch (ConstraintException ignored) {
+        }
+        try {
+            read.readFloat("hello", 3);
+            this.hello = read.readFloat("hello", 3);
         } catch (ConstraintException ignored) {
         }
     }

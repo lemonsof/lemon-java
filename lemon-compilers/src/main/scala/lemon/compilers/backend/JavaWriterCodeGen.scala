@@ -79,6 +79,21 @@ trait JavaWriterCodeGen extends JavaBackend{
           .arg(JExpr.lit(signed))
           .arg(source)
           .arg(attributes))
+      case Float_(length) =>
+        if(length == 4){
+          block.invoke(writer,"writeFloat")
+            .arg(JExpr.lit(field.name))
+            .arg(JExpr.lit(field.id))
+            .arg(source)
+            .arg(attributes)
+        } else {
+          block.invoke(writer,"writeDouble")
+            .arg(JExpr.lit(field.name))
+            .arg(JExpr.lit(field.id))
+            .arg(source)
+            .arg(attributes)
+        }
+
       case _:Boolean_ =>
         block.add(writer.invoke("writeBoolean")
           .arg(JExpr.lit(field.name))
@@ -147,6 +162,15 @@ trait JavaWriterCodeGen extends JavaBackend{
           .arg(JExpr.lit(length))
           .arg(JExpr.lit(signed))
           .arg(source)
+      case Float_(length) =>
+        if(length == 4){
+          block.invoke(writer,"writeFloat")
+            .arg(source)
+        } else {
+          block.invoke(writer,"writeDouble")
+            .arg(source)
+        }
+
       case _:String_ =>
         block.invoke(writer,"writeString")
           .arg(source)

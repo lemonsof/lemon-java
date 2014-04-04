@@ -16,6 +16,10 @@ trait Writer {
 
   def writeString(name:String,id:Int,value:String,attributes:util.Map[String,Any])
 
+  def writeFloat(name:String,id:Int,value:Float,attributes:util.Map[String,Any])
+
+  def writeDouble(name:String,id:Int,value:Double,attributes:util.Map[String,Any])
+
   def writeBoolean(name:String,id:Int,value:Boolean,attributes:util.Map[String,Any])
 
   def writeArray(name:String,id:Int,length:Int):SeqWriter
@@ -40,4 +44,6 @@ trait SeqWriter{
   def writeList():SeqWriter
   def writeSet():SeqWriter
   def writeMap():SeqWriter
+  def writeFloat(value:Float)
+  def writeDouble(value:Double)
 }

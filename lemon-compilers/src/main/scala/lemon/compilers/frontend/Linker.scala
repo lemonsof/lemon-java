@@ -40,19 +40,26 @@ object Linker {
   private def link(message:Message_)(implicit context :LinkContext):Message_ = {
     val name = message.script.get.namespace.fullName + "." + message.name
 
+    var id = 0
+
     Message_(
       name,
-      message.fields.map(link),
+      message.fields.map{
+        field =>
+          val result = link(field,id)
+          id += 1
+          result
+      },
       message.extend.map(link),
       message.attributes.map(link))
   }
 
-  private def link(field :Field_)(implicit context :LinkContext) : Field_ = {
+  private def link(field :Field_,id:Int)(implicit context :LinkContext) : Field_ = {
     Field_(
       field.name,
       link(field.fieldType),
       field.required,
-      field.attributes.map(link))
+      field.attributes.map(link),id)
   }
 
   private def link(anyType : Type_)(implicit context :LinkContext) : Type_ = {

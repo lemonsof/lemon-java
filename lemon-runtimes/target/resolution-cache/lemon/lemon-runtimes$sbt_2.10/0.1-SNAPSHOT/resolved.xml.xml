@@ -4,7 +4,7 @@
 		module="lemon-runtimes$sbt_2.10"
 		revision="0.1-SNAPSHOT"
 		status="integration"
-		publication="20140403134637"
+		publication="20140404085252"
 	/>
 	<configurations>
 		<conf name="default" visibility="public"/>

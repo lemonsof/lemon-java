@@ -12,7 +12,7 @@ message Manifest{
 
     GlobalName          appName;
     string              version;
-    string              description;
+    double              description;
     list<string>        actors;
     GlobalName[10]      clients;
     int32_f[10]          others;
@@ -23,6 +23,7 @@ message ManifestV2 :Manifest{
     required map<string,string>     properties;
     list<list<string>>              actors2;
     map<string,map<string,int32>>   properties2;
+    float                           hello;
 }
 
 
