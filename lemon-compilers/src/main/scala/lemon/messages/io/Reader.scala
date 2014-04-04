@@ -1,6 +1,6 @@
 package lemon.messages.io
 
-import lemon.messages.ConstraintException
+import lemon.messages.{EnumValue, ConstraintException}
 
 
 trait Reader {
@@ -28,6 +28,8 @@ trait Reader {
   def readSet(name:String,id:Int):SeqReader
   @throws[ConstraintException]
   def readMap(name:String,id:Int):SeqReader
+  @throws[ConstraintException]
+  def readEnum(name:String,id:Int,length:Int):EnumValue
 }
 
 trait SeqReader{
@@ -43,4 +45,5 @@ trait SeqReader{
   def readMap():SeqReader
   def readFloat():Float
   def readDouble():Double
+  def readEnum(length:Int):EnumValue
 }

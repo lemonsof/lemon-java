@@ -23,8 +23,37 @@ class JavaCodeGen(output:File,types:Iterable[IR]) extends JavaBackend {
   private def gen(current : IR){
     current match {
       case message:Message_ => omit(message)
+      case enum:Enum_ => omit(enum)
       case _ =>
     }
+  }
+
+  override protected def omit(enum: Enum_): JDefinedClass = {
+    val model = codeModel._class(enum.name,ClassType.ENUM)
+
+    model.field(JMod.PRIVATE,classOf[Long],"value")
+
+    val constructor = model.constructor(JMod.PRIVATE)
+
+    val param = constructor.param(JMod.FINAL,classOf[Long],"value")
+
+    constructor.body().assign(JExpr._this().ref("value"),param)
+
+    enum.attributes.foreach{
+      attribute => omit(enum,attribute,model)
+    }
+
+
+    enum.fields.foreach {
+      field => omit(enum,field,model)
+    }
+
+    model
+  }
+
+
+  override protected def omit(enum:Enum_,field:(Long,String),model :JDefinedClass):JEnumConstant = {
+    model.enumConstant(field._2).arg(JExpr.lit(field._1))
   }
 
   override protected def omit(message: Message_): JDefinedClass = {
@@ -84,6 +113,8 @@ class JavaCodeGen(output:File,types:Iterable[IR]) extends JavaBackend {
                                attribute: Attribute_,
                                model: JDefinedClass,
                                fieldModel: JFieldVar): Option[JAnnotationUse] = None
+
+  override protected def omit(enum: Enum_, attribute: Attribute_, model: JDefinedClass): Option[JAnnotationUse] = None
 }
 
 

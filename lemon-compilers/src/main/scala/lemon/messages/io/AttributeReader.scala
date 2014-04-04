@@ -1,6 +1,6 @@
 package lemon.messages.io
 
-import lemon.messages.ConstraintException
+import lemon.messages.{EnumValue, ConstraintException}
 import lemon.messages.reflect._
 import lemon.messages.reflect.MessageLiteral_
 import lemon.messages.reflect.SeqLiteral_
@@ -140,6 +140,14 @@ private sealed class MessageLiteralReader(literal:MessageLiteral_) extends Reade
     }
   }
 
+  @throws[ConstraintException]
+  override def readEnum(name: String, id: Int, length: Int): EnumValue = {
+    read(name,id) match {
+      case value:EnumLiteral_ => new EnumValue(value.value)
+      case _ =>
+        throw new ConstraintException(s"message literal(${literal.name}}) not found supper message","",0)
+    }
+  }
 }
 
 private sealed class SeqLiteralReader(literal:SeqLiteral_) extends SeqReader {
@@ -233,6 +241,14 @@ private sealed class SeqLiteralReader(literal:SeqLiteral_) extends SeqReader {
   }
 
   override def readNext(): Boolean = iterator.hasNext
+
+  override def readEnum(length: Int): EnumValue = {
+    iterator.next() match {
+      case value:EnumLiteral_ => new EnumValue(value.value)
+      case _ =>
+        throw new ConstraintException(s"message literal(${literal.name}}) not found supper message","",0)
+    }
+  }
 }
 
 private sealed class MapLiteralReader(literal:MapLiteral_) extends SeqReader {
@@ -336,6 +352,13 @@ private sealed class MapLiteralReader(literal:MapLiteral_) extends SeqReader {
     }
   }
 
+  override def readEnum(length: Int): EnumValue = {
+    next() match {
+      case value:EnumLiteral_ => new EnumValue(value.value)
+      case _ =>
+        throw new ConstraintException(s"message literal(${literal.name}}) not found supper message","",0)
+    }
+  }
 
   override def readNext(): Boolean = {
     readKey = true

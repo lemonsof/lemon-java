@@ -1,6 +1,7 @@
 package lemon.messages.io
 
 import java.util
+import lemon.messages.EnumValue
 
 trait Writer {
 
@@ -22,13 +23,15 @@ trait Writer {
 
   def writeBoolean(name:String,id:Int,value:Boolean,attributes:util.Map[String,Any])
 
-  def writeArray(name:String,id:Int,length:Int):SeqWriter
+  def writeEnum(name:String,id:Int,length:Int,value:EnumValue,attributes:util.Map[String,Any])
 
-  def writeList(name:String,id:Int):SeqWriter
+  def writeArray(name:String,id:Int,length:Int,attributes:util.Map[String,Any]):SeqWriter
 
-  def writeSet(name:String,id:Int):SeqWriter
+  def writeList(name:String,id:Int,attributes:util.Map[String,Any]):SeqWriter
 
-  def writeMap(name:String,id:Int):SeqWriter
+  def writeSet(name:String,id:Int,attributes:util.Map[String,Any]):SeqWriter
+
+  def writeMap(name:String,id:Int,attributes:util.Map[String,Any]):SeqWriter
 
   def end()
 }

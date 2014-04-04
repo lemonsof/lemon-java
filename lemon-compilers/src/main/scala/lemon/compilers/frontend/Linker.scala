@@ -188,6 +188,7 @@ object Linker {
 
     Enum_(
       name,
+      enum.length,
       enum.fields,
       enum.attributes.map(link))
   }

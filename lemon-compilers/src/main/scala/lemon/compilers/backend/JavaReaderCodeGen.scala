@@ -146,6 +146,7 @@ trait JavaReaderCodeGen extends JavaBackend{
             .arg(JExpr.lit(field.id)))
 
         readMap(keyType,valType,seqReader,target,block)
+
       case _ =>
     }
   }

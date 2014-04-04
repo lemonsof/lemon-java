@@ -50,8 +50,10 @@ class Script(file:File) extends RegexParsers with PackratParsers {
     case a ~ None ~ t ~ n => Field_(n,t,false,a)
   }
 
-  private lazy val enum = (attribute.* <~ "enum") ~ id ~ ("{" ~> enumFields <~ "}") ^^ {
-    case a ~ n ~ e => Enum_(n,e,a)
+  private lazy val enumLength = "1" ^^^ 1 | "2" ^^^ 2 | "4" ^^^ 4 | "8" ^^^ 8
+
+  private lazy val enum = (attribute.* <~ "enum") ~ ("(" ~> enumLength  <~ ")") ~ id ~ ("{" ~> enumFields <~ "}") ^^ {
+    case a ~ l ~ n ~ e => Enum_(n,l,e,a)
   }
 
   private lazy val enumFields  = {

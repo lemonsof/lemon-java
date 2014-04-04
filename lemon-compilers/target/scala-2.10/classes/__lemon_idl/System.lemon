@@ -1,6 +1,6 @@
 namespace lemon
 
-enum ServiceType{ Local,Remote }
+enum(1) ServiceType{ Local,Remote }
 
 message GlobalName{
     int32        group;

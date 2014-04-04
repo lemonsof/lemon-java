@@ -46,6 +46,7 @@ case class Message_(
 
 case class Enum_(
                     name:String,
+                    length:Int,
                     fields : List[(Long,String)],
                     attributes : List[Attribute_]) extends CustomerType_{
   override def Name = name

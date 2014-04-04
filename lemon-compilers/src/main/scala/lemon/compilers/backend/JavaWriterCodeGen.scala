@@ -4,7 +4,7 @@ import com.sun.codemodel._
 import lemon.messages.reflect._
 import lemon.messages.reflect.Field_
 import lemon.messages.reflect.Message_
-import lemon.messages.ConstraintException
+import lemon.messages.{EnumValue, ConstraintException}
 
 
 trait JavaWriterCodeGen extends JavaBackend{
@@ -109,7 +109,8 @@ trait JavaWriterCodeGen extends JavaBackend{
           writer.invoke("writeArray")
             .arg(JExpr.lit(field.name))
             .arg(JExpr.lit(field.id))
-            .arg(JExpr.lit(length)))
+            .arg(JExpr.lit(length))
+            .arg(attributes))
 
         writeSeq(valType,seqWriter,source,ifBlock,resolver)
       case List_(valType) =>
@@ -119,7 +120,8 @@ trait JavaWriterCodeGen extends JavaBackend{
           field.name + "Writer",
           writer.invoke("writeList")
             .arg(JExpr.lit(field.name))
-            .arg(JExpr.lit(field.id)))
+            .arg(JExpr.lit(field.id))
+            .arg(attributes))
 
         writeSeq(valType,seqWriter,source,ifBlock,resolver)
       case Set_(valType) =>
@@ -129,7 +131,8 @@ trait JavaWriterCodeGen extends JavaBackend{
           field.name + "Writer",
           writer.invoke("writeSet")
             .arg(JExpr.lit(field.name))
-            .arg(JExpr.lit(field.id)))
+            .arg(JExpr.lit(field.id))
+            .arg(attributes))
 
         writeSeq(valType,seqWriter,source,ifBlock,resolver)
 
@@ -140,9 +143,22 @@ trait JavaWriterCodeGen extends JavaBackend{
           field.name + "Writer",
           writer.invoke("writeMap")
             .arg(JExpr.lit(field.name))
-            .arg(JExpr.lit(field.id)))
+            .arg(JExpr.lit(field.id))
+            .arg(attributes))
 
         writeMap(keyType,valType,seqWriter,source,ifBlock,resolver)
+      case enum:Enum_ =>
+        val ifBlock = block._if(source.eq(JExpr._null()).not())._then()
+        ifBlock.block().invoke(writer,"writeEnum")
+          .arg(JExpr.lit(field.name))
+          .arg(JExpr.lit(field.id))
+          .arg(JExpr.lit(enum.length))
+          .arg(JExpr._new(codeModel.ref(
+            classOf[EnumValue]))
+            .arg(source.invoke("toString"))
+            .arg(source.invoke("getValue")))
+          .arg(attributes)
+
       case _ =>
     }
 
@@ -201,6 +217,14 @@ trait JavaWriterCodeGen extends JavaBackend{
           writer.invoke("writeSet"))
 
         writeMap(keyType,childValType,seqWriter,source,block,resolver,stack + 1)
+      case enum:Enum_ =>
+        block.invoke(writer,"writeEnum")
+          .arg(JExpr.lit(enum.length))
+          .arg(JExpr._new(codeModel.ref(
+          classOf[EnumValue]))
+          .arg(source.invoke("toString"))
+          .arg(source.invoke("getValue")))
+
       case _=>
     }
   }

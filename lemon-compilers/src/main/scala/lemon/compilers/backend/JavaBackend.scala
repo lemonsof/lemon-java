@@ -18,6 +18,14 @@ import lemon.messages.reflect.Field_
 abstract class JavaBackend {
   protected def codeModel:JCodeModel
 
+
+  protected def omit(enum:Enum_):JDefinedClass
+
+  protected def omit(enum:Enum_,attribute:Attribute_,model :JDefinedClass):Option[JAnnotationUse]
+
+  protected def omit(enum:Enum_,field:(Long,String),model :JDefinedClass):JEnumConstant
+
+
   protected def omit(message:Message_):JDefinedClass
 
   protected def omit(message:Message_,attribute:Attribute_,model :JDefinedClass):Option[JAnnotationUse]
